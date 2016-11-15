@@ -44,6 +44,18 @@ public class CreacionBD {
             + "FOREIGN KEY (CODPROVEEDOR) REFERENCES PROVEEDORES(CODIGO),"
             + "FOREIGN KEY (CODPIEZA) REFERENCES PIEZAS(CODIGO),"
             + "FOREIGN KEY (CODPROYECTO) REFERENCES PROYECTOS(CODIGO))";
+    private static final String INSERT_PIEZAS = "INSERT INTO PIEZAS(CODIGO, NOMBRE, PRECIO, DESCRIPCION) VALUES ('10000', 'PROCESADOR', 129.90, 'INTEL I76700'),"
+            + "('10001', 'PROCESADOR', 179.00, 'AMD 8800'),"
+            + "('10002', 'TARGETA GRAFICA', 249.90, 'NVIDIA GTX 1060')";
+    private static final String INSERT_PROVEEDORES = "INSERT INTO PROVEEDORES(CODIGO, NOMBRE, APELLIDOS, DIRECCION) VALUES('20000', 'MARIO', 'GARCIA PEREZ', 'CALLE ARRIAGA 2'),"
+            + "('20001','AITOR','FERNANDEZ ETXEBERRIA','CALLE ANDORRA 43'),"
+            + "('20002','JORDI','SANCHEZ RECIO','CALLE ROMERO 26')";
+    private static final String INSERT_PROYECTOS = "INSERT INTO PROYECTOS(CODIGO, NOMBRE, CIUDAD) VALUES('30000','MSI X8','MADRID'),"
+            + "('30001','ASUS P9','BARCELONA'),"
+            + "('30002','HP 4500','BILBAO')";
+    private static final String INSER_GESTION = "INSERT INTO GESTION(CODPROVEEDOR, CODPIEZA, CODPROYECTO, CANTIDAD) VALUES('10000','20000','30000',2),"
+            + "('10001', '20001', '30001', 5),"
+            + "('10002', '20002', '30003', 8)";
 
     public boolean ComprobarBD() {
         try {
@@ -81,6 +93,11 @@ public class CreacionBD {
             statement.executeUpdate(TABLA_PROVEEDORES);
             statement.executeUpdate(TABLA_PROYECTOS);
             statement.executeUpdate(TABLA_GESTION);
+            statement.executeUpdate(INSERT_PIEZAS);
+            statement.executeUpdate(INSERT_PROVEEDORES);
+            statement.executeUpdate(INSERT_PROYECTOS);
+            statement.executeUpdate(INSER_GESTION);
+
         } catch (SQLException ex) {
         }
     }

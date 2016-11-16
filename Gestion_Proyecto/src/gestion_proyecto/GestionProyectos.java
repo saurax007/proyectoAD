@@ -29,18 +29,57 @@ public class GestionProyectos extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Base de Datos");
+
+        jMenuItem1.setText("Crear Base de Datos");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Borrar Base de Datos");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Salir");
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Proveedores");
+
+        jMenu7.setText("Gestion de Proveedores");
+        jMenu2.add(jMenu7);
+
+        jMenu8.setText("Consulta de Proveedores");
+
+        jMenuItem4.setText("Por codigo");
+        jMenu8.add(jMenuItem4);
+
+        jMenuItem5.setText("Por Nombre");
+        jMenu8.add(jMenuItem5);
+
+        jMenuItem6.setText("Por Direccion");
+        jMenu8.add(jMenuItem6);
+
+        jMenu2.add(jMenu8);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Piezas");
@@ -50,6 +89,19 @@ public class GestionProyectos extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Gestion Global");
+
+        jMenuItem7.setText("Piezas, Proveedores y Proyectos");
+        jMenu5.add(jMenuItem7);
+
+        jMenuItem8.setText("Suministros por Proveedor");
+        jMenu5.add(jMenuItem8);
+
+        jMenuItem9.setText("Suministros por Piezas");
+        jMenu5.add(jMenuItem9);
+
+        jMenuItem10.setText("Estadisticas");
+        jMenu5.add(jMenuItem10);
+
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Ayuda");
@@ -113,6 +165,18 @@ public class GestionProyectos extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

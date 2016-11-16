@@ -27,87 +27,87 @@ public class GestionProyectos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        gestionProyectoMenu = new javax.swing.JMenuBar();
+        bdMenu = new javax.swing.JMenu();
+        crearBDButton = new javax.swing.JMenuItem();
+        borrarBDButton = new javax.swing.JMenuItem();
+        salirAppButton = new javax.swing.JMenuItem();
+        proveedorMenu = new javax.swing.JMenu();
+        gestionProveedoresButton = new javax.swing.JMenu();
+        consultaProveedorButton = new javax.swing.JMenu();
+        proveedorCodigoButton = new javax.swing.JMenuItem();
+        proveedorNombreButton = new javax.swing.JMenuItem();
+        proveedorDireccionButton = new javax.swing.JMenuItem();
+        piezasMenu = new javax.swing.JMenu();
+        proyectosMenu = new javax.swing.JMenu();
+        gestionGlobalMenu = new javax.swing.JMenu();
+        pppButton = new javax.swing.JMenuItem();
+        suministroProveedorButton = new javax.swing.JMenuItem();
+        suministroPiezasButton = new javax.swing.JMenuItem();
+        estadisticasButton = new javax.swing.JMenuItem();
+        ayudaMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Base de Datos");
+        bdMenu.setText("Base de Datos");
 
-        jMenuItem1.setText("Crear Base de Datos");
-        jMenu1.add(jMenuItem1);
+        crearBDButton.setText("Crear Base de Datos");
+        bdMenu.add(crearBDButton);
 
-        jMenuItem2.setText("Borrar Base de Datos");
-        jMenu1.add(jMenuItem2);
+        borrarBDButton.setText("Borrar Base de Datos");
+        bdMenu.add(borrarBDButton);
 
-        jMenuItem3.setText("Salir");
-        jMenu1.add(jMenuItem3);
+        salirAppButton.setText("Salir");
+        bdMenu.add(salirAppButton);
 
-        jMenuBar1.add(jMenu1);
+        gestionProyectoMenu.add(bdMenu);
 
-        jMenu2.setText("Proveedores");
+        proveedorMenu.setText("Proveedores");
 
-        jMenu7.setText("Gestion de Proveedores");
-        jMenu2.add(jMenu7);
+        gestionProveedoresButton.setText("Gestion de Proveedores");
+        proveedorMenu.add(gestionProveedoresButton);
 
-        jMenu8.setText("Consulta de Proveedores");
+        consultaProveedorButton.setText("Consulta de Proveedores");
 
-        jMenuItem4.setText("Por codigo");
-        jMenu8.add(jMenuItem4);
+        proveedorCodigoButton.setText("Por codigo");
+        consultaProveedorButton.add(proveedorCodigoButton);
 
-        jMenuItem5.setText("Por Nombre");
-        jMenu8.add(jMenuItem5);
+        proveedorNombreButton.setText("Por Nombre");
+        consultaProveedorButton.add(proveedorNombreButton);
 
-        jMenuItem6.setText("Por Direccion");
-        jMenu8.add(jMenuItem6);
+        proveedorDireccionButton.setText("Por Direccion");
+        consultaProveedorButton.add(proveedorDireccionButton);
 
-        jMenu2.add(jMenu8);
+        proveedorMenu.add(consultaProveedorButton);
 
-        jMenuBar1.add(jMenu2);
+        gestionProyectoMenu.add(proveedorMenu);
 
-        jMenu3.setText("Piezas");
-        jMenuBar1.add(jMenu3);
+        piezasMenu.setText("Piezas");
+        gestionProyectoMenu.add(piezasMenu);
 
-        jMenu4.setText("Proyectos");
-        jMenuBar1.add(jMenu4);
+        proyectosMenu.setText("Proyectos");
+        gestionProyectoMenu.add(proyectosMenu);
 
-        jMenu5.setText("Gestion Global");
+        gestionGlobalMenu.setText("Gestion Global");
 
-        jMenuItem7.setText("Piezas, Proveedores y Proyectos");
-        jMenu5.add(jMenuItem7);
+        pppButton.setText("Piezas, Proveedores y Proyectos");
+        gestionGlobalMenu.add(pppButton);
 
-        jMenuItem8.setText("Suministros por Proveedor");
-        jMenu5.add(jMenuItem8);
+        suministroProveedorButton.setText("Suministros por Proveedor");
+        gestionGlobalMenu.add(suministroProveedorButton);
 
-        jMenuItem9.setText("Suministros por Piezas");
-        jMenu5.add(jMenuItem9);
+        suministroPiezasButton.setText("Suministros por Piezas");
+        gestionGlobalMenu.add(suministroPiezasButton);
 
-        jMenuItem10.setText("Estadisticas");
-        jMenu5.add(jMenuItem10);
+        estadisticasButton.setText("Estadisticas");
+        gestionGlobalMenu.add(estadisticasButton);
 
-        jMenuBar1.add(jMenu5);
+        gestionProyectoMenu.add(gestionGlobalMenu);
 
-        jMenu6.setText("Ayuda");
-        jMenuBar1.add(jMenu6);
+        ayudaMenu.setText("Ayuda");
+        gestionProyectoMenu.add(ayudaMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(gestionProyectoMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,24 +159,24 @@ public class GestionProyectos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenu ayudaMenu;
+    private javax.swing.JMenu bdMenu;
+    private javax.swing.JMenuItem borrarBDButton;
+    private javax.swing.JMenu consultaProveedorButton;
+    private javax.swing.JMenuItem crearBDButton;
+    private javax.swing.JMenuItem estadisticasButton;
+    private javax.swing.JMenu gestionGlobalMenu;
+    private javax.swing.JMenu gestionProveedoresButton;
+    private javax.swing.JMenuBar gestionProyectoMenu;
+    private javax.swing.JMenu piezasMenu;
+    private javax.swing.JMenuItem pppButton;
+    private javax.swing.JMenuItem proveedorCodigoButton;
+    private javax.swing.JMenuItem proveedorDireccionButton;
+    private javax.swing.JMenu proveedorMenu;
+    private javax.swing.JMenuItem proveedorNombreButton;
+    private javax.swing.JMenu proyectosMenu;
+    private javax.swing.JMenuItem salirAppButton;
+    private javax.swing.JMenuItem suministroPiezasButton;
+    private javax.swing.JMenuItem suministroProveedorButton;
     // End of variables declaration//GEN-END:variables
 }

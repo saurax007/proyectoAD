@@ -7,6 +7,7 @@ package gestion_proyecto.GestionBD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -130,6 +131,66 @@ public class CreacionBD {
             System.out.println("VendorError: " + ex.getErrorCode());
         }
 
+    }
+
+    public void AltaProveedor(String codigo, String nombre, String apellidos, String direccion) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            PreparedStatement statement = con.prepareStatement("INSERT INTO PROVEEDORES VALUES (?,?,?,?)");
+            statement.setString(1, codigo);
+            statement.setString(2, nombre);
+            statement.setString(3, apellidos);
+            statement.setString(4, direccion);
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Insertado correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+    
+    public void BajaProveedor(String codigo, String nombre, String apellidos, String direccion){
+     try {
+            Connection con = null;
+            con = Conectar();
+            PreparedStatement statement = con.prepareStatement("DELETE PROVEEDOR WHERE CODIGO = ?");
+            statement.setString(1, codigo);
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Borrado correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    
+    }
+    
+    public void ModProveedor(String codigo, String nombre, String apellidos, String direccion){
+    try {
+            Connection con = null;
+            con = Conectar();
+            PreparedStatement statement = con.prepareStatement("UPDATE PROVEEDORES SET NOMBRE = ?, APELLIDOS = ?, DIRECCION = ? WHERE id = ?");
+            statement.setString(1, nombre);
+            statement.setString(2, apellidos);
+            statement.setString(3, direccion);
+            statement.setString(4, codigo);
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Modificado correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    
     }
 
 }

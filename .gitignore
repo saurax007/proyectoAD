@@ -12,3 +12,5 @@
 hs_err_pid*
 /bin/
 /Gestion_Proyecto/nbproject/private/
+/Gestion_Proyecto/build/
+/Gestion_Proyecto/dist/

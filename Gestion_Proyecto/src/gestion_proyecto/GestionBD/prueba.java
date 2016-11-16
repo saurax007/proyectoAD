@@ -17,7 +17,11 @@ public class prueba {
     public static void main(String[] args) {
         CreacionBD bd = new CreacionBD();
         Boolean flag = bd.ComprobarBD();
+<<<<<<< HEAD
         /*if (!flag) {
+=======
+        if (!flag) {
+>>>>>>> refs/remotes/saurax007/master
             System.out.println("No hay bd creada"
                     + "Creando..");
             bd.CreacionBD();
@@ -28,10 +32,14 @@ public class prueba {
             bd.BorrarBD();
             System.out.println("Creando otra vez...");
             bd.CreacionBD();
+<<<<<<< HEAD
         }*/
         bd.GetProveedores();
         bd.GetPiezas();
         bd.GetProyectos();
+=======
+        }
+>>>>>>> refs/remotes/saurax007/master
     }
 
 }

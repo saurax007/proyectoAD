@@ -7,10 +7,7 @@ package gestion_proyecto.GestionBD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-<<<<<<< HEAD
 import java.sql.PreparedStatement;
-=======
->>>>>>> refs/remotes/saurax007/master
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -94,11 +91,10 @@ public class CreacionBD {
         }
         Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
-<<<<<<< HEAD
+
                 "root", "toor");
-=======
-                "root", "root");
->>>>>>> refs/remotes/saurax007/master
+
+
         return con;
 
     }
@@ -140,7 +136,6 @@ public class CreacionBD {
 
     }
 
-<<<<<<< HEAD
     public void AltaProveedores(String codigo, String nombre, String apellidos, String direccion) {
         try {
             Connection con = null;
@@ -400,6 +395,5 @@ public class CreacionBD {
         return rs;
     }
 
-=======
->>>>>>> refs/remotes/saurax007/master
+
 }

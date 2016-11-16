@@ -91,7 +91,7 @@ public class CreacionBD {
         }
         Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
-                "root", "root");
+                "root", "toor");
         return con;
 
     }
@@ -133,10 +133,12 @@ public class CreacionBD {
 
     }
 
-    public void AltaProveedor(String codigo, String nombre, String apellidos, String direccion) {
+    public void AltaProveedores(String codigo, String nombre, String apellidos, String direccion) {
         try {
             Connection con = null;
             con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("INSERT INTO PROVEEDORES VALUES (?,?,?,?)");
             statement.setString(1, codigo);
             statement.setString(2, nombre);
@@ -153,11 +155,13 @@ public class CreacionBD {
         }
 
     }
-    
-    public void BajaProveedor(String codigo, String nombre, String apellidos, String direccion){
-     try {
+
+    public void BajaProveedores(String codigo, String nombre, String apellidos, String direccion) {
+        try {
             Connection con = null;
             con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("DELETE PROVEEDOR WHERE CODIGO = ?");
             statement.setString(1, codigo);
             int retorno = statement.executeUpdate();
@@ -169,14 +173,16 @@ public class CreacionBD {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-    
+
     }
-    
-    public void ModProveedor(String codigo, String nombre, String apellidos, String direccion){
-    try {
+
+    public void ModProveedores(String codigo, String nombre, String apellidos, String direccion) {
+        try {
             Connection con = null;
             con = Conectar();
-            PreparedStatement statement = con.prepareStatement("UPDATE PROVEEDORES SET NOMBRE = ?, APELLIDOS = ?, DIRECCION = ? WHERE id = ?");
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("UPDATE PROVEEDORES SET NOMBRE = ?, APELLIDOS = ?, DIRECCION = ? WHERE CODIGO = ?");
             statement.setString(1, nombre);
             statement.setString(2, apellidos);
             statement.setString(3, direccion);
@@ -190,7 +196,200 @@ public class CreacionBD {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-    
+
+    }
+
+    public ResultSet GetProveedores() {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROVEEDORES");
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public void AltaPiezas(String codigo, String nombre, float precio, String descripcion) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("INSERT INTO PIEZAS VALUES (?,?,?,?)");
+            statement.setString(1, codigo);
+            statement.setString(2, nombre);
+            statement.setFloat(3, precio);
+            statement.setString(4, descripcion);
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public void BajaPiezas(String codigo) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("DELETE PIEZAS WHERE CODIGO = ?");
+            statement.setString(1, codigo);
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Borrado correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public void ModPiezas(String codigo, String nombre, float precio, String descripcion) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("UPDATE PIEZAS SET NOMBRE = ?, PRECIO = ?, DESCRIPCION = ? WHERE CODIGO = ?");
+            statement.setString(1, nombre);
+            statement.setFloat(2, precio);
+            statement.setString(3, descripcion);
+            statement.setString(4, codigo);
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Modificado correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public ResultSet GetPiezas() {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PIEZAS");
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public void AltaProyectos(String codigo, String nombre, String ciudad) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("INSERT INTO PROYECTOS VALUES (?,?,?)");
+            statement.setString(1, codigo);
+            statement.setString(2, nombre);
+            statement.setString(3, ciudad);
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public void BajaProyectos(String codigo) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("DELETE PPROYECTOS WHERE CODIGO = ?");
+            statement.setString(1, codigo);
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Borrado correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public void ModProyectos(String codigo, String nombre, String ciudad) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("UPDATE PROYECTOS SET NOMBRE = ?, CIUDAD = ? WHERE CODIGO = ?");
+            statement.setString(1, nombre);
+            statement.setString(2, ciudad);
+            statement.setString(4, codigo);
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Modificado correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public ResultSet GetProyectos() {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROYECTOS");
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
     }
 
 }

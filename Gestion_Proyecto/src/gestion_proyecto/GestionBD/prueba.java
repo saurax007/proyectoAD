@@ -17,7 +17,7 @@ public class prueba {
     public static void main(String[] args) {
         CreacionBD bd = new CreacionBD();
         Boolean flag = bd.ComprobarBD();
-        if (!flag) {
+        /*if (!flag) {
             System.out.println("No hay bd creada"
                     + "Creando..");
             bd.CreacionBD();
@@ -28,7 +28,10 @@ public class prueba {
             bd.BorrarBD();
             System.out.println("Creando otra vez...");
             bd.CreacionBD();
-        }
+        }*/
+        bd.GetProveedores();
+        bd.GetPiezas();
+        bd.GetProyectos();
     }
 
 }

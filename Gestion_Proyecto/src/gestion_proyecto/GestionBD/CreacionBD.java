@@ -91,9 +91,7 @@ public class CreacionBD {
         }
         Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
-
                 "root", "toor");
-
 
         return con;
 
@@ -395,5 +393,60 @@ public class CreacionBD {
         return rs;
     }
 
+    public void Relacionar(String codProveedor, String codPieza, String codProyecto, float cantidad) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("INSERT INTO GESTION(CODPROVEEDOR, CODPIEZA, CODPROYECTO, CANTIDAD) VALUES('?','?','?',?)");
+            statement.setString(1, codProveedor);
+            statement.setString(2, codPieza);
+            statement.setString(3, codProyecto);
+            statement.setFloat(4, cantidad);
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public ResultSet PiezasProveedor(String codProveedor) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM GESTION WHERE CODPROVEEDOR = '?'");
+            statement.setString(1, codProveedor);
+            rs = statement.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public ResultSet PiezasProyecto(String codPieza) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM GESTION WHERE CODPIEZA = '?'");
+            statement.setString(1, codPieza);
+            rs = statement.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+    
 
 }

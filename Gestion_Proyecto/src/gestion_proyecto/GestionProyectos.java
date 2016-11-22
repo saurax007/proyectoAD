@@ -5,16 +5,32 @@
  */
 package gestion_proyecto;
 
-/**
- *
- * @author Gregorio
- */
+import gestion_proyecto.GestionBD.CreacionBD;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+/*
+Para buscar el codigo y poner datos
+try {
+            while (rs.next()) {
+                if (rs.getString(1).equalsIgnoreCase(tfCodigoProveedor.getText())) {
+                    System.out.println(rs.getString(1));
+                    tfNombre.setText(rs.getString(2));
+                    tfApellidos.setText(rs.getString(3));
+                    tfDireccion.setText(rs.getString(4));
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionDeProveedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+*/
 public class GestionProyectos extends javax.swing.JFrame {
 
     /**
      * Creates new form GestionProyectos
      */
-    public GestionProyectos() {     
+    public GestionProyectos() {
         GestionGlobalPPP ggppp = new GestionGlobalPPP();
         SuministrosPorProveedor spp = new SuministrosPorProveedor();
         PiezasSuministradasProyectos psp = new PiezasSuministradasProyectos();
@@ -52,6 +68,11 @@ public class GestionProyectos extends javax.swing.JFrame {
         ayudaMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                formPropertyChange(evt);
+            }
+        });
 
         bdMenu.setText("Base de Datos");
 
@@ -64,9 +85,19 @@ public class GestionProyectos extends javax.swing.JFrame {
         bdMenu.add(crearBDButton);
 
         borrarBDButton.setText("Borrar Base de Datos");
+        borrarBDButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarBDButtonActionPerformed(evt);
+            }
+        });
         bdMenu.add(borrarBDButton);
 
         salirAppButton.setText("Salir");
+        salirAppButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirAppButtonActionPerformed(evt);
+            }
+        });
         bdMenu.add(salirAppButton);
 
         gestionProyectoMenu.add(bdMenu);
@@ -143,11 +174,20 @@ public class GestionProyectos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearBDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearBDButtonActionPerformed
-        // TODO add your handling code here:
+        CreacionBD bd = new CreacionBD();
+        //comprueba si existe
+        Boolean existe = bd.ComprobarBD();
+        if (existe) {
+            JOptionPane.showMessageDialog(null, "YA EXISTE LA BD", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            bd.CreacionBD();
+            JOptionPane.showMessageDialog(null, "BD CREADA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }//GEN-LAST:event_crearBDButtonActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-                GestionDeProveedores gp = new GestionDeProveedores();
+        GestionDeProveedores gp = new GestionDeProveedores();
         gp.show();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -155,6 +195,30 @@ public class GestionProyectos extends javax.swing.JFrame {
         ConsultaProveedoreesCodigo cp = new ConsultaProveedoreesCodigo();
         cp.show();
     }//GEN-LAST:event_proveedorCodigoButtonActionPerformed
+
+    private void borrarBDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBDButtonActionPerformed
+        CreacionBD bd = new CreacionBD();
+        JFrame parent = new JFrame();
+        //comprueba si existe
+        Boolean existe = bd.ComprobarBD();
+        if (existe) {
+
+            bd.BorrarBD();
+            JOptionPane.showMessageDialog(null, "BD BORRADA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "NO EXISTE BD", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }//GEN-LAST:event_borrarBDButtonActionPerformed
+
+    private void salirAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirAppButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_salirAppButtonActionPerformed
+
+    private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+
+    }//GEN-LAST:event_formPropertyChange
 
     /**
      * @param args the command line arguments

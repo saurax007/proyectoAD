@@ -5,17 +5,28 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.CreacionBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gregorio
  */
 public class GestionDeProveedores extends javax.swing.JFrame {
 
+    ResultSet rs = null;
+
     /**
      * Creates new form GestionDeProveedores
      */
     public GestionDeProveedores() {
         initComponents();
+        CreacionBD bd = new CreacionBD();
+        rs = bd.GetProveedores();
     }
 
     /**
@@ -84,6 +95,11 @@ public class GestionDeProveedores extends javax.swing.JFrame {
         btLimpiar.setText("Limpiar");
 
         btInsertar.setText("Insertar");
+        btInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInsertarActionPerformed(evt);
+            }
+        });
 
         btModificar.setText("Modificar");
 
@@ -113,9 +129,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, Short.MAX_VALUE))
+                                .addComponent(jLabel3)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addGap(0, 0, Short.MAX_VALUE)
                                     .addComponent(jLabel2)
@@ -320,6 +334,14 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     private void btListadoDerechaMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoDerechaMasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btListadoDerechaMasActionPerformed
+
+    private void btInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertarActionPerformed
+        //Insertar Proveedor
+        CreacionBD bd = new CreacionBD();
+        if (tfCodigoProveedor.getText().equals("") || tfNombre.getText().equals("") || tfApellidos.getText().equals("") || tfDireccion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "HAY ALGUN CAMPO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btInsertarActionPerformed
 
     /**
      * @param args the command line arguments

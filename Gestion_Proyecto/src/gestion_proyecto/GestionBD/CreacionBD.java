@@ -93,6 +93,7 @@ public class CreacionBD {
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
                 "root", "toor");
 
+
         return con;
 
     }

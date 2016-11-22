@@ -14,7 +14,11 @@ public class GestionProyectos extends javax.swing.JFrame {
     /**
      * Creates new form GestionProyectos
      */
-    public GestionProyectos() {
+    public GestionProyectos() {     
+        GestionGlobalPPP ggppp = new GestionGlobalPPP();
+        SuministrosPorProveedor spp = new SuministrosPorProveedor();
+        PiezasSuministradasProyectos psp = new PiezasSuministradasProyectos();
+        ResumenesEstadisticas re = new ResumenesEstadisticas();
         initComponents();
     }
 
@@ -33,7 +37,7 @@ public class GestionProyectos extends javax.swing.JFrame {
         borrarBDButton = new javax.swing.JMenuItem();
         salirAppButton = new javax.swing.JMenuItem();
         proveedorMenu = new javax.swing.JMenu();
-        gestionProveedoresButton = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         consultaProveedorButton = new javax.swing.JMenu();
         proveedorCodigoButton = new javax.swing.JMenuItem();
         proveedorNombreButton = new javax.swing.JMenuItem();
@@ -52,6 +56,11 @@ public class GestionProyectos extends javax.swing.JFrame {
         bdMenu.setText("Base de Datos");
 
         crearBDButton.setText("Crear Base de Datos");
+        crearBDButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearBDButtonActionPerformed(evt);
+            }
+        });
         bdMenu.add(crearBDButton);
 
         borrarBDButton.setText("Borrar Base de Datos");
@@ -64,12 +73,22 @@ public class GestionProyectos extends javax.swing.JFrame {
 
         proveedorMenu.setText("Proveedores");
 
-        gestionProveedoresButton.setText("Gestion de Proveedores");
-        proveedorMenu.add(gestionProveedoresButton);
+        jMenuItem1.setText("Gestion de Proveedores");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        proveedorMenu.add(jMenuItem1);
 
         consultaProveedorButton.setText("Consulta de Proveedores");
 
         proveedorCodigoButton.setText("Por codigo");
+        proveedorCodigoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proveedorCodigoButtonActionPerformed(evt);
+            }
+        });
         consultaProveedorButton.add(proveedorCodigoButton);
 
         proveedorNombreButton.setText("Por Nombre");
@@ -123,6 +142,20 @@ public class GestionProyectos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void crearBDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearBDButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearBDButtonActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+                GestionDeProveedores gp = new GestionDeProveedores();
+        gp.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void proveedorCodigoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorCodigoButtonActionPerformed
+        ConsultaProveedoreesCodigo cp = new ConsultaProveedoreesCodigo();
+        cp.show();
+    }//GEN-LAST:event_proveedorCodigoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -166,8 +199,8 @@ public class GestionProyectos extends javax.swing.JFrame {
     private javax.swing.JMenuItem crearBDButton;
     private javax.swing.JMenuItem estadisticasButton;
     private javax.swing.JMenu gestionGlobalMenu;
-    private javax.swing.JMenu gestionProveedoresButton;
     private javax.swing.JMenuBar gestionProyectoMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu piezasMenu;
     private javax.swing.JMenuItem pppButton;
     private javax.swing.JMenuItem proveedorCodigoButton;

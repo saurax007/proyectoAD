@@ -13,6 +13,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Base de Datos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearBDButtonActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="borrarBDButton">
               <Properties>
@@ -31,11 +34,14 @@
             <Property name="text" type="java.lang.String" value="Proveedores"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="gestionProveedoresButton">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gestion de Proveedores"/>
               </Properties>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
             <Menu class="javax.swing.JMenu" name="consultaProveedorButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta de Proveedores"/>
@@ -45,6 +51,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Por codigo"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="proveedorCodigoButtonActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="proveedorNombreButton">
                   <Properties>

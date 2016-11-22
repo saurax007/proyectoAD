@@ -92,7 +92,7 @@ public class CreacionBD {
         Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
 
-                "root", "toor");
+                "root", "root");
 
 
         return con;

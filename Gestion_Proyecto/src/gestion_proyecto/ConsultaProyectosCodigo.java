@@ -9,12 +9,12 @@ package gestion_proyecto;
  *
  * @author Gregorio
  */
-public class ConsultaProveedoreesNombre extends javax.swing.JFrame {
+public class ConsultaProyectosCodigo extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
-    public ConsultaProveedoreesNombre() {
+    public ConsultaProyectosCodigo() {
         initComponents();
     }
 
@@ -28,18 +28,23 @@ public class ConsultaProveedoreesNombre extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tfCodigo = new javax.swing.JTextField();
-        btBuscarProveedor = new javax.swing.JButton();
-        cbCodigo = new javax.swing.JComboBox<>();
+        codigoText = new javax.swing.JTextField();
+        proyectoButton = new javax.swing.JButton();
+        codigosCombo = new javax.swing.JComboBox<>();
         tfDatos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Escribe el codigo o parte del codigo");
 
-        btBuscarProveedor.setText("Buscar Proveedor");
+        proyectoButton.setText("Buscar Proveedor");
+        proyectoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proyectoButtonActionPerformed(evt);
+            }
+        });
 
-        cbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        codigosCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -51,12 +56,12 @@ public class ConsultaProveedoreesNombre extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(codigoText, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btBuscarProveedor))
+                        .addComponent(proyectoButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
-                        .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(codigosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -68,10 +73,10 @@ public class ConsultaProveedoreesNombre extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBuscarProveedor))
+                    .addComponent(codigoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(proyectoButton))
                 .addGap(18, 18, 18)
-                .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(codigosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -80,16 +85,20 @@ public class ConsultaProveedoreesNombre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void proyectoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proyectoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_proyectoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btBuscarProveedor;
-    private javax.swing.JComboBox<String> cbCodigo;
+    private javax.swing.JTextField codigoText;
+    private javax.swing.JComboBox<String> codigosCombo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField tfCodigo;
+    private javax.swing.JButton proyectoButton;
     private javax.swing.JTextField tfDatos;
     // End of variables declaration//GEN-END:variables
 }

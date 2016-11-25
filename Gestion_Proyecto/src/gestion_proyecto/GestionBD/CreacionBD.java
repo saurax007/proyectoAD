@@ -93,7 +93,6 @@ public class CreacionBD {
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
                 "root", "toor");
 
-
         return con;
 
     }
@@ -113,6 +112,7 @@ public class CreacionBD {
             statement.executeUpdate(INSERT_PROVEEDORES);
             statement.executeUpdate(INSERT_PROYECTOS);
             statement.executeUpdate(INSERT_GESTION);
+            statement.close();
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -127,6 +127,7 @@ public class CreacionBD {
             con = Conectar();
             Statement statement = con.createStatement();
             statement.executeUpdate(borrarBD);
+            statement.close();
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -158,7 +159,8 @@ public class CreacionBD {
 
     }
 
-    public void BajaProveedores(String codigo, String nombre, String apellidos, String direccion) {
+    public int BajaProveedores(String codigo) {
+        int flag = 0;
         try {
             Connection con = null;
             con = Conectar();
@@ -169,13 +171,14 @@ public class CreacionBD {
             int retorno = statement.executeUpdate();
             if (retorno > 0) {
                 System.out.println("Borrado correctamente");
+                flag = 1;
             }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-
+        return flag;
     }
 
     public void ModProveedores(String codigo, String nombre, String apellidos, String direccion) {
@@ -210,13 +213,12 @@ public class CreacionBD {
             st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("SELECT * FROM PROVEEDORES");
             rs = statement.executeQuery();
-            while (rs.next()) {
+            /*while (rs.next()) {
                 System.out.println(rs.getString(1));
                 System.out.println(rs.getString(2));
                 System.out.println(rs.getString(3));
                 System.out.println(rs.getString(4));
-            }
-
+            }*/
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -448,6 +450,5 @@ public class CreacionBD {
         }
         return rs;
     }
-    
 
 }

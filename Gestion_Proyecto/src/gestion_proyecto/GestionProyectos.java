@@ -43,7 +43,16 @@ public class GestionProyectos extends javax.swing.JFrame {
         proveedorNombreButton = new javax.swing.JMenuItem();
         proveedorDireccionButton = new javax.swing.JMenuItem();
         piezasMenu = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         proyectosMenu = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         gestionGlobalMenu = new javax.swing.JMenu();
         pppButton = new javax.swing.JMenuItem();
         suministroProveedorButton = new javax.swing.JMenuItem();
@@ -102,9 +111,40 @@ public class GestionProyectos extends javax.swing.JFrame {
         gestionProyectoMenu.add(proveedorMenu);
 
         piezasMenu.setText("Piezas");
+
+        jMenuItem2.setText("Gestion Piezas");
+        piezasMenu.add(jMenuItem2);
+
+        jMenu2.setText("Consulta Piezas");
+
+        jMenuItem3.setText("Por Codigo");
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setText("Por Nombre");
+        jMenu2.add(jMenuItem4);
+
+        piezasMenu.add(jMenu2);
+
         gestionProyectoMenu.add(piezasMenu);
 
         proyectosMenu.setText("Proyectos");
+
+        jMenuItem5.setText("Gestion Proyectos");
+        proyectosMenu.add(jMenuItem5);
+
+        jMenu1.setText("Consulta Proyectos");
+
+        jMenuItem6.setText("Por Codigo");
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem7.setText("Por Nombre");
+        jMenu1.add(jMenuItem7);
+
+        jMenuItem8.setText("Por Ciudad");
+        jMenu1.add(jMenuItem8);
+
+        proyectosMenu.add(jMenu1);
+
         gestionProyectoMenu.add(proyectosMenu);
 
         gestionGlobalMenu.setText("Gestion Global");
@@ -152,7 +192,7 @@ public class GestionProyectos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void proveedorCodigoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorCodigoButtonActionPerformed
-        ConsultaProveedoreesCodigo cp = new ConsultaProveedoreesCodigo();
+        ConsultaProveedoresCodigo cp = new ConsultaProveedoresCodigo();
         cp.show();
     }//GEN-LAST:event_proveedorCodigoButtonActionPerformed
 
@@ -200,7 +240,16 @@ public class GestionProyectos extends javax.swing.JFrame {
     private javax.swing.JMenuItem estadisticasButton;
     private javax.swing.JMenu gestionGlobalMenu;
     private javax.swing.JMenuBar gestionProyectoMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenu piezasMenu;
     private javax.swing.JMenuItem pppButton;
     private javax.swing.JMenuItem proveedorCodigoButton;

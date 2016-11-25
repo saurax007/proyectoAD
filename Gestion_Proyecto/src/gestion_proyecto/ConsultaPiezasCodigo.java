@@ -9,12 +9,12 @@ package gestion_proyecto;
  *
  * @author Gregorio
  */
-public class ConsultaProveedoreesCodigo extends javax.swing.JFrame {
+public class ConsultaPiezasCodigo extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
-    public ConsultaProveedoreesCodigo() {
+    public ConsultaPiezasCodigo() {
         initComponents();
     }
 

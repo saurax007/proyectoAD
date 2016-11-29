@@ -15,6 +15,8 @@ public class PiezasSuministradasProyectos extends javax.swing.JFrame {
      * Creates new form PiezasSuministradasProyectos
      */
     public PiezasSuministradasProyectos() {
+                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         initComponents();
     }
 

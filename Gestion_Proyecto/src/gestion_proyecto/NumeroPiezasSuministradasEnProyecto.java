@@ -15,6 +15,8 @@ public class NumeroPiezasSuministradasEnProyecto extends javax.swing.JFrame {
     /** Creates new form NumeroPiezasSuministradasEnProyecto */
     public NumeroPiezasSuministradasEnProyecto() {
         initComponents();
+                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /** This method is called from within the constructor to

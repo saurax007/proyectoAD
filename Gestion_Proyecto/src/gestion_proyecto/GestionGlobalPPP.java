@@ -16,6 +16,8 @@ public class GestionGlobalPPP extends javax.swing.JFrame {
      */
     public GestionGlobalPPP() {
         initComponents();
+                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**

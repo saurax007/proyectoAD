@@ -16,6 +16,8 @@ public class ConsultaProveedoreesCodigo extends javax.swing.JFrame {
      */
     public ConsultaProveedoreesCodigo() {
         initComponents();
+                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**

@@ -16,6 +16,8 @@ public class ResumenesEstadisticas extends javax.swing.JFrame {
      */
     public ResumenesEstadisticas() {
         initComponents();
+                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**

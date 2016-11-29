@@ -16,6 +16,8 @@ public class SuministrosPorProveedor extends javax.swing.JFrame {
      */
     public SuministrosPorProveedor() {
         initComponents();
+                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**

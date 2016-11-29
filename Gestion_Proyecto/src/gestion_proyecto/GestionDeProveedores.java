@@ -32,7 +32,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
      */
     public GestionDeProveedores() {
         initComponents();
-
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -470,7 +470,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     private void btListadoDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoDerechaActionPerformed
         //Suma 1 con el tope del size del arraylist
         if (pagina == ultimaPagina) {
-            JOptionPane.showMessageDialog(null, "ULTIMA PAGINA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            //No pasa pagina
         } else {
             pagina++;
             tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));

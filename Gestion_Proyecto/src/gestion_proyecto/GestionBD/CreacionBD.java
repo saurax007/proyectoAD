@@ -91,7 +91,7 @@ public class CreacionBD {
         }
         Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
-                "root", "toor");
+                "root", "root");
 
         return con;
 
@@ -166,7 +166,7 @@ public class CreacionBD {
             con = Conectar();
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
-            PreparedStatement statement = con.prepareStatement("DELETE PROVEEDOR WHERE CODIGO = ?");
+            PreparedStatement statement = con.prepareStatement("DELETE FROM PROVEEDORES WHERE CODIGO = ?");
             statement.setString(1, codigo);
             int retorno = statement.executeUpdate();
             if (retorno > 0) {
@@ -252,7 +252,7 @@ public class CreacionBD {
             con = Conectar();
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
-            PreparedStatement statement = con.prepareStatement("DELETE PIEZAS WHERE CODIGO = ?");
+            PreparedStatement statement = con.prepareStatement("DELETE FROM PIEZAS WHERE CODIGO = ?");
             statement.setString(1, codigo);
             int retorno = statement.executeUpdate();
             if (retorno > 0) {
@@ -337,7 +337,7 @@ public class CreacionBD {
             con = Conectar();
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
-            PreparedStatement statement = con.prepareStatement("DELETE PPROYECTOS WHERE CODIGO = ?");
+            PreparedStatement statement = con.prepareStatement("DELETE FROM PPROYECTOS WHERE CODIGO = '?'");
             statement.setString(1, codigo);
             int retorno = statement.executeUpdate();
             if (retorno > 0) {

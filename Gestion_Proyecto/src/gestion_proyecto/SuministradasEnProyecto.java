@@ -16,6 +16,8 @@ public class SuministradasEnProyecto extends javax.swing.JFrame {
      */
     public SuministradasEnProyecto() {
         initComponents();
+                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**

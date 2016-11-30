@@ -47,7 +47,7 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
         cbCodigo = new javax.swing.JComboBox<>();
         tfDatos = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Escribe el codigo o parte del codigo");
 
@@ -105,7 +105,7 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-        String codigo = btBuscarProveedor.getText();
+        String codigo = tfCodigo.getText();
          try {
         PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE CODIGO = '?'*");
         statement.setString(1, codigo);
@@ -122,7 +122,7 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     String codigo = String.valueOf(cbCodigo.getSelectedItem());;
          try {
         PreparedStatement statement = con.prepareStatement("SELECT * FROM proveedores WHERE CODIGO = '?'");
-        statement.setString(1, codigo);
+        statement.setString(0, codigo);
         rs = statement.executeQuery();
          while (rs.next()) {
              tfDatos.setText(rs.getString(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n"+rs.getString(4));   

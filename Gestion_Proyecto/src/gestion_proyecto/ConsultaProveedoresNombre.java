@@ -47,7 +47,7 @@ public class ConsultaProveedoresNombre extends javax.swing.JFrame {
         proveedorCombo = new javax.swing.JComboBox<>();
         datosText = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Escriba el nombre del proveedor");
 
@@ -59,6 +59,11 @@ public class ConsultaProveedoresNombre extends javax.swing.JFrame {
         });
 
         proveedorCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        proveedorCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proveedorComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,9 +105,9 @@ public class ConsultaProveedoresNombre extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-       String nombre = btBuscarProveedor.getText();
+       String nombre = proveedorText.getText();
          try {
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE NOMBRE = '?'*");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM proveedores WHERE NOMBRE = '?'*");
         statement.setString(1, nombre);
         rs = statement.executeQuery();
          while (rs.next()) {
@@ -112,6 +117,20 @@ public class ConsultaProveedoresNombre extends javax.swing.JFrame {
         Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
     }
     }//GEN-LAST:event_btBuscarProveedorActionPerformed
+
+    private void proveedorComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorComboActionPerformed
+          String nombre = String.valueOf(proveedorCombo.getSelectedItem());;
+         try {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM proveedores WHERE NOMBRE = '?'");
+        statement.setString(1, nombre);
+        rs = statement.executeQuery();
+         while (rs.next()) {
+             datosText.setText(rs.getString(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n"+rs.getString(4));   
+            }
+    } catch (SQLException ex) {
+        Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_proveedorComboActionPerformed
 
     /**
      * @param args the command line arguments

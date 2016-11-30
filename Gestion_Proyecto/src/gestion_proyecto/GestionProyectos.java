@@ -6,6 +6,9 @@
 package gestion_proyecto;
 
 import gestion_proyecto.GestionBD.CreacionBD;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -271,8 +274,14 @@ public class GestionProyectos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void proveedorCodigoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorCodigoButtonActionPerformed
-        ConsultaPiezasPrecio cp = new ConsultaPiezasPrecio();
-        cp.show();
+        ConsultaPiezasPrecio cp;
+        try {
+            cp = new ConsultaPiezasPrecio();
+            cp.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionProyectos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_proveedorCodigoButtonActionPerformed
 
     private void borrarBDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBDButtonActionPerformed
@@ -291,13 +300,25 @@ public class GestionProyectos extends javax.swing.JFrame {
         }    }//GEN-LAST:event_borrarBDButtonActionPerformed
 
     private void proveedorNombreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorNombreButtonActionPerformed
-        ConsultaProveedoresNombre cpn = new ConsultaProveedoresNombre();
-        cpn.show();
+        ConsultaProveedoresNombre cpn;
+        try {
+            cpn = new ConsultaProveedoresNombre();
+            cpn.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionProyectos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_proveedorNombreButtonActionPerformed
 
     private void proveedorDireccionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorDireccionButtonActionPerformed
-        ConsultaProveedoresDireccion cpd = new ConsultaProveedoresDireccion();
-        cpd.show();
+        ConsultaProveedoresDireccion cpd;
+        try {
+            cpd = new ConsultaProveedoresDireccion();
+            cpd.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionProyectos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_proveedorDireccionButtonActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -306,13 +327,25 @@ public class GestionProyectos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        ConsultaPiezasCodigo cpc = new ConsultaPiezasCodigo();
-        cpc.show();
+        ConsultaPiezasCodigo cpc;
+        try {
+            cpc = new ConsultaPiezasCodigo();
+            cpc.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionProyectos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        ConsultaPiezasNombre cpn = new ConsultaPiezasNombre();
-        cpn.show();
+        ConsultaPiezasNombre cpn;
+        try {
+            cpn = new ConsultaPiezasNombre();
+            cpn.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionProyectos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -320,8 +353,12 @@ public class GestionProyectos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        ConsultaProyectosCodigo cproyectosc = new ConsultaProyectosCodigo();
-        cproyectosc.show();
+        try {
+            ConsultaProyectosCodigo cproyectosc = new ConsultaProyectosCodigo();
+            cproyectosc.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionProyectos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -330,8 +367,12 @@ public class GestionProyectos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        ConsultaProyectosCiudad cproyectoscd = new ConsultaProyectosCiudad();
-        cproyectoscd.show();
+        try {
+            ConsultaProyectosCiudad cproyectoscd = new ConsultaProyectosCiudad();
+            cproyectoscd.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionProyectos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void pppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pppButtonActionPerformed

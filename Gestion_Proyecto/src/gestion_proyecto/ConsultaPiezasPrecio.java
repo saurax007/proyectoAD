@@ -46,7 +46,7 @@ public class ConsultaPiezasPrecio extends javax.swing.JFrame {
         cbCodigo = new javax.swing.JComboBox<>();
         tfDatos = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Escribe el precio natural sin decimas");
 

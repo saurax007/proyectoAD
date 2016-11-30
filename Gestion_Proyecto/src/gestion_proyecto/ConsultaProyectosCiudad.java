@@ -5,16 +5,29 @@
  */
 package gestion_proyecto;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaProyectosCiudad extends javax.swing.JFrame {
-
+    private static final String usarBD = "USE proyecto";
+    ResultSet rs = null;
+    Connection con;
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
-    public ConsultaProyectosCiudad() {
+    public ConsultaProyectosCiudad() throws SQLException {
+         this.con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
+                "root", "root");
         initComponents();
     }
 
@@ -38,8 +51,18 @@ public class ConsultaProyectosCiudad extends javax.swing.JFrame {
         jLabel1.setText("Escriba laCiudad");
 
         btBuscarProyectos.setText("Buscar Pryectos");
+        btBuscarProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProyectosActionPerformed(evt);
+            }
+        });
 
         ciudadesCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ciudadesCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ciudadesComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,6 +103,34 @@ public class ConsultaProyectosCiudad extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ciudadesComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadesComboActionPerformed
+         String ciudad = String.valueOf(ciudadesCombo.getSelectedItem());;
+         try {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM proyectos WHERE CIUDAD = '?'");
+        statement.setString(1, ciudad);
+        rs = statement.executeQuery();
+         while (rs.next()) {
+             datosText.setText(rs.getString(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n");   
+            }
+    } catch (SQLException ex) {
+        Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_ciudadesComboActionPerformed
+
+    private void btBuscarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProyectosActionPerformed
+        String direccion = ciudadText.getText();
+         try {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM proyectos WHERE CIUDAD = '?'*");
+        statement.setString(1, direccion);
+        rs = statement.executeQuery();
+         while (rs.next()) {
+                ciudadesCombo.addItem(rs.getString(1));
+            }
+    } catch (SQLException ex) {
+        Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_btBuscarProyectosActionPerformed
 
     /**
      * @param args the command line arguments

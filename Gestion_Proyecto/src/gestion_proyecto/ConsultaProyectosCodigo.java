@@ -5,16 +5,29 @@
  */
 package gestion_proyecto;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaProyectosCodigo extends javax.swing.JFrame {
-
+    private static final String usarBD = "USE proyecto";
+    ResultSet rs = null;
+    Connection con;
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
-    public ConsultaProyectosCodigo() {
+    public ConsultaProyectosCodigo() throws SQLException {
+        this.con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
+                "root", "root");
         initComponents();
     }
 
@@ -45,6 +58,11 @@ public class ConsultaProyectosCodigo extends javax.swing.JFrame {
         });
 
         codigosCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        codigosCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigosComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,8 +104,32 @@ public class ConsultaProyectosCodigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void proyectoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proyectoButtonActionPerformed
-        // TODO add your handling code here:
+        String codigo = codigoText.getText();
+         try {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM proyectos WHERE CODIGO = '?'*");
+        statement.setString(1, codigo);
+        rs = statement.executeQuery();
+         while (rs.next()) {
+                codigosCombo.addItem(rs.getString(1));
+            }
+    } catch (SQLException ex) {
+        Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_proyectoButtonActionPerformed
+
+    private void codigosComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigosComboActionPerformed
+        String codigo = String.valueOf(codigosCombo.getSelectedItem());;
+         try {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM proyectos WHERE CODIGO = '?'");
+        statement.setString(1, codigo);
+        rs = statement.executeQuery();
+         while (rs.next()) {
+             tfDatos.setText(rs.getString(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n");   
+            }
+    } catch (SQLException ex) {
+        Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_codigosComboActionPerformed
 
     /**
      * @param args the command line arguments

@@ -48,7 +48,7 @@ Connection con;
         cbCodigo = new javax.swing.JComboBox<>();
         tfDatos = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Escribe el codigo o parte del codigo");
 
@@ -108,7 +108,7 @@ Connection con;
     private void btBuscarPiezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPiezasActionPerformed
        String codigo = tfCodigo.getText();
          try {
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE CODIGO = '?'*");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE CODIGO = ? ");
         statement.setString(1, codigo);
         rs = statement.executeQuery();
          while (rs.next()) {

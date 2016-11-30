@@ -38,11 +38,11 @@
                       <Component id="cbCodigo" min="-2" pref="211" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                      <Component id="tfDatos" min="-2" pref="326" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="tfDatos" min="-2" pref="379" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,14 +67,14 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Escribe el codigo o parte del codigo"/>
+        <Property name="text" type="java.lang.String" value="Escribe el precio natural sin decimas"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfCodigo">
     </Component>
     <Component class="javax.swing.JButton" name="btBuscarProveedor">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar Proveedor"/>
+        <Property name="text" type="java.lang.String" value="Buscar Piezas"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarProveedorActionPerformed"/>

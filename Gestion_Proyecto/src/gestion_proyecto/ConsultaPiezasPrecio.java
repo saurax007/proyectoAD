@@ -17,16 +17,15 @@ import java.util.logging.Logger;
  *
  * @author Gregorio
  */
-public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
-
-    private static final String usarBD = "USE proyecto";
+public class ConsultaPiezasPrecio extends javax.swing.JFrame {
+     private static final String usarBD = "USE proyecto";
     ResultSet rs = null;
     Connection con;
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
-    public ConsultaProveedoresCodigo() throws SQLException {
-        this.con = DriverManager.getConnection(
+    public ConsultaPiezasPrecio() throws SQLException {
+         this.con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
                 "root", "root");
         initComponents();
@@ -49,9 +48,9 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Escribe el codigo o parte del codigo");
+        jLabel1.setText("Escribe el precio natural sin decimas");
 
-        btBuscarProveedor.setText("Buscar Proveedor");
+        btBuscarProveedor.setText("Buscar Piezas");
         btBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscarProveedorActionPerformed(evt);
@@ -82,9 +81,9 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
                         .addGap(102, 102, 102)
                         .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,10 +104,10 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-        String codigo = btBuscarProveedor.getText();
+       String precio = btBuscarProveedor.getText();
          try {
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE CODIGO = '?'*");
-        statement.setString(1, codigo);
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE PRECIO = '?'*");
+        statement.setString(1, precio);
         rs = statement.executeQuery();
          while (rs.next()) {
                 cbCodigo.addItem(rs.getString(1));
@@ -119,13 +118,13 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     }//GEN-LAST:event_btBuscarProveedorActionPerformed
 
     private void cbCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCodigoActionPerformed
-    String codigo = String.valueOf(cbCodigo.getSelectedItem());;
+       String precio = String.valueOf(cbCodigo.getSelectedItem());;
          try {
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM proveedores WHERE CODIGO = '?'");
-        statement.setString(1, codigo);
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE PRECIO = '?'");
+        statement.setString(1, precio);
         rs = statement.executeQuery();
          while (rs.next()) {
-             tfDatos.setText(rs.getString(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n"+rs.getString(4));   
+             tfDatos.setText(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+"\n");   
             }
     } catch (SQLException ex) {
         Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);

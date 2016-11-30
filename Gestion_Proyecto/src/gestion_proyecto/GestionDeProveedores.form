@@ -80,10 +80,7 @@
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -192,21 +189,33 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLimpiarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btInsertar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Insertar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btInsertarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btModificar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btModificarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btEliminar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEliminarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="tfCodigoProveedor">
             </Component>
@@ -419,21 +428,33 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ejecutar Consulta"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btListadoEjecutarConsultaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btListadoIzquierdaMas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="|&lt;&lt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btListadoIzquierdaMasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btListadoIzquierda">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btListadoIzquierdaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btListadoDerecha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btListadoDerechaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btListadoDerechaMas">
               <Properties>

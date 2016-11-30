@@ -5,16 +5,30 @@
  */
 package gestion_proyecto;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
 
+    private static final String usarBD = "USE proyecto";
+    ResultSet rs = null;
+    Connection con;
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
-    public ConsultaProveedoresDireccion() {
+    public ConsultaProveedoresDireccion() throws SQLException {
+        this.con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
+                "root", "root");
         initComponents();
     }
 
@@ -38,8 +52,18 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
         jLabel1.setText("Escriba la direccion");
 
         btBuscarProveedor.setText("Buscar Proveedor");
+        btBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProveedorActionPerformed(evt);
+            }
+        });
 
         direccionCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        direccionCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                direccionComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,6 +104,34 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
+        String direccion = btBuscarProveedor.getText();
+         try {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM piezas WHERE DIRECCION = '?'*");
+        statement.setString(1, direccion);
+        rs = statement.executeQuery();
+         while (rs.next()) {
+                direccionCombo.addItem(rs.getString(1));
+            }
+    } catch (SQLException ex) {
+        Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_btBuscarProveedorActionPerformed
+
+    private void direccionComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionComboActionPerformed
+      String codigo = String.valueOf(direccionCombo.getSelectedItem());;
+         try {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM proveedores WHERE CODIGO = '?'");
+        statement.setString(1, codigo);
+        rs = statement.executeQuery();
+         while (rs.next()) {
+             datosText.setText(rs.getString(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n"+rs.getString(4));   
+            }
+    } catch (SQLException ex) {
+        Logger.getLogger(ConsultaPiezasNombre.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_direccionComboActionPerformed
 
     /**
      * @param args the command line arguments

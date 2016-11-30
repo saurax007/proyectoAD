@@ -31,7 +31,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="tfCodigo" min="-2" pref="66" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btBuscarProveedor" min="-2" max="-2" attributes="0"/>
+                      <Component id="btBuscarPiezas" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
@@ -42,7 +42,7 @@
                       <Component id="tfDatos" min="-2" pref="326" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,7 +53,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btBuscarProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btBuscarPiezas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="cbCodigo" min="-2" max="-2" attributes="0"/>
@@ -72,10 +72,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfCodigo">
     </Component>
-    <Component class="javax.swing.JButton" name="btBuscarProveedor">
+    <Component class="javax.swing.JButton" name="btBuscarPiezas">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar Proveedor"/>
+        <Property name="text" type="java.lang.String" value="Buscar Piezas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscarPiezasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbCodigo">
       <Properties>
@@ -88,6 +91,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCodigoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

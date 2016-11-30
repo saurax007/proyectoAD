@@ -5,11 +5,27 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.CreacionBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gregorio
  */
 public class GestionDeProveedores extends javax.swing.JFrame {
+
+    ResultSet rs = null;
+    int pagina;
+    int ultimaPagina;
+    ArrayList<String> CodigoProveedor = new ArrayList<String>();
+    ArrayList<String> Nombre = new ArrayList<String>();
+    ArrayList<String> Apellidos = new ArrayList<String>();
+    ArrayList<String> Direccion = new ArrayList<String>();
 
     /**
      * Creates new form GestionDeProveedores
@@ -82,12 +98,32 @@ public class GestionDeProveedores extends javax.swing.JFrame {
         jLabel4.setText("Direccion");
 
         btLimpiar.setText("Limpiar");
+        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimpiarActionPerformed(evt);
+            }
+        });
 
         btInsertar.setText("Insertar");
+        btInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInsertarActionPerformed(evt);
+            }
+        });
 
         btModificar.setText("Modificar");
+        btModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btModificarActionPerformed(evt);
+            }
+        });
 
         btEliminar.setText("Eliminar");
+        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -113,9 +149,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, Short.MAX_VALUE))
+                                .addComponent(jLabel3)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addGap(0, 0, Short.MAX_VALUE)
                                     .addComponent(jLabel2)
@@ -195,12 +229,32 @@ public class GestionDeProveedores extends javax.swing.JFrame {
         jLabel11.setText("////");
 
         btListadoEjecutarConsulta.setText("Ejecutar Consulta");
+        btListadoEjecutarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListadoEjecutarConsultaActionPerformed(evt);
+            }
+        });
 
         btListadoIzquierdaMas.setText("|<<");
+        btListadoIzquierdaMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListadoIzquierdaMasActionPerformed(evt);
+            }
+        });
 
         btListadoIzquierda.setText("<<");
+        btListadoIzquierda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListadoIzquierdaActionPerformed(evt);
+            }
+        });
 
         btListadoDerecha.setText(">>");
+        btListadoDerecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListadoDerechaActionPerformed(evt);
+            }
+        });
 
         btListadoDerechaMas.setText(">>|");
         btListadoDerechaMas.addActionListener(new java.awt.event.ActionListener() {
@@ -318,8 +372,130 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btListadoDerechaMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoDerechaMasActionPerformed
-        // TODO add your handling code here:
+        //Va al ultimo registro
+        pagina = ultimaPagina;
+        tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
+        tfListadoNombre.setText(Nombre.get(pagina));
+        tfListadoApellidos.setText(Apellidos.get(pagina));
+        tfListadoDireccion.setText(Direccion.get(pagina));
+        tfListadoPagina.setText(String.valueOf(pagina + 1));
+
     }//GEN-LAST:event_btListadoDerechaMasActionPerformed
+
+    private void btInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertarActionPerformed
+        //Insertar Proveedor
+        CreacionBD bd = new CreacionBD();
+        if (tfCodigoProveedor.getText().equals("") || tfNombre.getText().equals("") || tfApellidos.getText().equals("") || tfDireccion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "HAY ALGUN CAMPO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            bd.AltaProveedores(tfCodigoProveedor.getText(), tfNombre.getText(), tfApellidos.getText(), tfDireccion.getText());
+            JOptionPane.showMessageDialog(null, "PROVEEDOR AÑADIDO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btInsertarActionPerformed
+
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+        CreacionBD bd = new CreacionBD();
+        if (tfCodigoProveedor.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "EL CAMPO CODIGO ESTA VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int flag = bd.BajaProveedores(tfCodigoProveedor.getText());
+            if (flag == 0) {
+                JOptionPane.showMessageDialog(null, "HA HABIDO UN ERROR INTENTADO BORRAR EL PROVEEDOR", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "BORRADO CORRECTAMENTE", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+    }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
+        CreacionBD bd = new CreacionBD();
+        if (tfCodigoProveedor.getText().equals("") || tfNombre.getText().equals("") || tfApellidos.getText().equals("") || tfDireccion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "HAY ALGUN CAMPO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            bd.ModProveedores(tfCodigoProveedor.getText(), tfNombre.getText(), tfApellidos.getText(), tfDireccion.getText());
+            JOptionPane.showMessageDialog(null, "PROVEEDOR MODIFICADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btModificarActionPerformed
+
+    private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
+        tfCodigoProveedor.setText("");
+        tfNombre.setText("");
+        tfApellidos.setText("");
+        tfDireccion.setText("");
+    }//GEN-LAST:event_btLimpiarActionPerformed
+
+    private void btListadoEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoEjecutarConsultaActionPerformed
+        ResultSet rs = null;
+        CreacionBD bd = new CreacionBD();
+
+        //Se itera y guarda la informacion del resultset
+        try {
+            rs = bd.GetProveedores();
+            while (rs.next()) {
+                CodigoProveedor.add(rs.getString(1));
+                Nombre.add(rs.getString(2));
+                Apellidos.add(rs.getString(3));
+                Direccion.add(rs.getString(4));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionDeProveedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Se muestra el primer registro y se pone la pagina en 1
+        pagina = 0;
+        ultimaPagina = Nombre.size() - 1;
+
+        tfListadoPagina.setText(String.valueOf(pagina + 1));
+        tfListadoPagTotal.setText(String.valueOf(ultimaPagina+1));
+        tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
+        tfListadoNombre.setText(Nombre.get(pagina));
+        tfListadoApellidos.setText(Apellidos.get(pagina));
+        tfListadoDireccion.setText(Direccion.get(pagina));
+    }//GEN-LAST:event_btListadoEjecutarConsultaActionPerformed
+
+    private void btListadoIzquierdaMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoIzquierdaMasActionPerformed
+        //Va a la primera pagina
+        pagina = 0;
+        tfListadoPagina.setText(String.valueOf(pagina));
+        tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
+        tfListadoNombre.setText(Nombre.get(pagina));
+        tfListadoApellidos.setText(Apellidos.get(pagina));
+        tfListadoDireccion.setText(Direccion.get(pagina));
+        tfListadoPagina.setText(String.valueOf(pagina + 1));
+
+    }//GEN-LAST:event_btListadoIzquierdaMasActionPerformed
+
+    private void btListadoDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoDerechaActionPerformed
+        //Suma 1 con el tope del size del arraylist
+        if (pagina == ultimaPagina) {
+            //No pasa pagina
+        } else {
+            pagina++;
+            tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
+            tfListadoNombre.setText(Nombre.get(pagina));
+            tfListadoApellidos.setText(Apellidos.get(pagina));
+            tfListadoDireccion.setText(Direccion.get(pagina));
+            tfListadoPagina.setText(String.valueOf(pagina + 1));
+
+        }
+
+    }//GEN-LAST:event_btListadoDerechaActionPerformed
+
+    private void btListadoIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoIzquierdaActionPerformed
+        if (pagina == 0) {
+            JOptionPane.showMessageDialog(null, "YA ESTAS EN LA PRIMERA PAGINA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            pagina--;
+            tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
+            tfListadoNombre.setText(Nombre.get(pagina));
+            tfListadoApellidos.setText(Apellidos.get(pagina));
+            tfListadoDireccion.setText(Direccion.get(pagina));
+            tfListadoPagina.setText(String.valueOf(pagina + 1));
+        }
+
+
+    }//GEN-LAST:event_btListadoIzquierdaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,7 @@
  */
 package gestion_proyecto.GestionBD;
 
+import gestion_proyecto.ConsultaPiezasNombre;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -227,6 +228,83 @@ public class CreacionBD {
         return rs;
     }
 
+    public ResultSet GetProveedoresPorCod(String codigo) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROVEEDORES WHERE CODIGO LIKE ?");
+            statement.setString(1, codigo + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public ResultSet GetProveedoresPorNombre(String nombre) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROVEEDORES WHERE NOMBRE LIKE ?");
+            statement.setString(1, nombre + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+
+    }
+
+    public ResultSet GetProveedoresPorDireccion(String direccion) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROVEEDORES WHERE DIRECCION LIKE ?");
+            statement.setString(1, direccion + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+
+    }
+
     public void AltaPiezas(String codigo, String nombre, float precio, String descripcion) {
         try {
             Connection con = null;
@@ -313,6 +391,56 @@ public class CreacionBD {
         return rs;
     }
 
+    public ResultSet GetPiezasPorCod(String codigo) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PIEZAS WHERE CODIGO LIKE ?");
+            statement.setString(1, codigo + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public ResultSet GetPiezasPorNombre(String nombre) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PIEZAS WHERE NOMBRE LIKE ?");
+            statement.setString(1, nombre + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
     public void AltaProyectos(String codigo, String nombre, String ciudad) {
         try {
             Connection con = null;
@@ -388,6 +516,81 @@ public class CreacionBD {
                 System.out.println(rs.getString(3));
             }
 
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public ResultSet GetProyectosPorCod(String codigo) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROYECTOS WHERE CODIGO LIKE ?");
+            statement.setString(1, codigo + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public ResultSet GetProyectosPorNombre(String nombre) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROYECTOS WHERE NOMBRE LIKE ?");
+            statement.setString(1, nombre + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+
+    public ResultSet GetProyectosPorCiudad(String ciudad) {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM PROYECTOS WHERE CIUDAD LIKE ?");
+            statement.setString(1, ciudad + "%");
+
+            rs = statement.executeQuery();
+            /* while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }*/
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

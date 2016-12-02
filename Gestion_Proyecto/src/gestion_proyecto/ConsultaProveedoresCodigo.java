@@ -5,11 +5,19 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.CreacionBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
+
+    ResultSet rs = null;
 
     /**
      * Creates new form ConsultaProveedoreesCodigo
@@ -17,7 +25,7 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     public ConsultaProveedoresCodigo() {
         initComponents();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
+        cbCodigo.removeAllItems();
     }
 
     /**
@@ -40,8 +48,18 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
         jLabel1.setText("Escribe el codigo o parte del codigo");
 
         btBuscarProveedor.setText("Buscar Proveedor");
+        btBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProveedorActionPerformed(evt);
+            }
+        });
 
         cbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCodigo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCodigoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,10 +100,35 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
+        CreacionBD bd = new CreacionBD();
+        rs = bd.GetProveedoresPorCod(tfCodigo.getText());
+        try {
+            while (rs.next()) {
+                cbCodigo.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btBuscarProveedorActionPerformed
+
+    private void cbCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCodigoMouseClicked
+        String codigo = String.valueOf(cbCodigo.getSelectedItem());
+        try {
+            rs.first();
+            while (rs.next()) {
+                if (codigo.equals(rs.getString(1))) {
+                    tfDatos.setText(rs.getString(1) + "\n" + rs.getString(2) + "\n" + rs.getString(3) + "\n" + rs.getString(4));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }     }//GEN-LAST:event_cbCodigoMouseClicked
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProveedor;

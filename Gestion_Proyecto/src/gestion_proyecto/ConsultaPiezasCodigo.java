@@ -5,18 +5,19 @@
  */
 package gestion_proyecto;
 
+import java.sql.ResultSet;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaPiezasCodigo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConsultaProveedoreesCodigo
-     */
+    ResultSet rs = null;
+
     public ConsultaPiezasCodigo() {
         initComponents();
-                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
     }
 
@@ -40,6 +41,11 @@ public class ConsultaPiezasCodigo extends javax.swing.JFrame {
         jLabel1.setText("Escribe el codigo o parte del codigo");
 
         btBuscarProveedor.setText("Buscar Proveedor");
+        btBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProveedorActionPerformed(evt);
+            }
+        });
 
         cbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -82,10 +88,13 @@ public class ConsultaPiezasCodigo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
+        
+    }//GEN-LAST:event_btBuscarProveedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProveedor;

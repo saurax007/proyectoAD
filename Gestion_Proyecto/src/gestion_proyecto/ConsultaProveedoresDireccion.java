@@ -5,19 +5,27 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.CreacionBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
 
+    ResultSet rs = null;
+
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
     public ConsultaProveedoresDireccion() {
         initComponents();
-                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        direccionCombo.removeAllItems();
     }
 
     /**
@@ -40,8 +48,18 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
         jLabel1.setText("Escriba la direccion");
 
         btBuscarProveedor.setText("Buscar Proveedor");
+        btBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProveedorActionPerformed(evt);
+            }
+        });
 
         direccionCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        direccionCombo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                direccionComboMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,10 +101,35 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
+CreacionBD bd = new CreacionBD();
+        rs = bd.GetProveedoresPorCod(direccionText.getText());
+        try {
+            while (rs.next()) {
+                direccionCombo.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }    }//GEN-LAST:event_btBuscarProveedorActionPerformed
+
+    private void direccionComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_direccionComboMouseClicked
+ String direccion = String.valueOf(direccionCombo.getSelectedItem());
+        try {
+            rs.first();
+            while (rs.next()) {
+                if (direccion.equals(rs.getString(1))) {
+                    datosText.setText(rs.getString(1) + "\n" + rs.getString(2) + "\n" + rs.getString(3) + "\n" + rs.getString(4));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+
+    }//GEN-LAST:event_direccionComboMouseClicked
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProveedor;

@@ -5,6 +5,9 @@
  */
 package gestion_proyecto.GestionBD;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author ion
@@ -14,25 +17,16 @@ public class prueba {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         CreacionBD bd = new CreacionBD();
-        Boolean flag = bd.ComprobarBD();
-        /*if (!flag) {
-        if (!flag) {
-            System.out.println("No hay bd creada"
-                    + "Creando..");
-            bd.CreacionBD();
-            System.out.println("Creada!");
-
-        } else {
-            System.out.println("Hay una bd creada, borrando...");
-            bd.BorrarBD();
-            System.out.println("Creando otra vez...");
-            bd.CreacionBD();
-        }*/
-        bd.GetProveedores();
-        bd.GetPiezas();
-        bd.GetProyectos();
+        ResultSet rs = null;
+        rs = bd.GetProveedoresPorCod("2");
+        while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+            }
         }
     }
 

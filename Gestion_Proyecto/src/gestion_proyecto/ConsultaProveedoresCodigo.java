@@ -41,7 +41,8 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
         tfCodigo = new javax.swing.JTextField();
         btBuscarProveedor = new javax.swing.JButton();
         cbCodigo = new javax.swing.JComboBox<>();
-        tfDatos = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        datosText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +62,10 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
             }
         });
 
+        datosText.setColumns(20);
+        datosText.setRows(5);
+        jScrollPane1.setViewportView(datosText);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,19 +73,22 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btBuscarProveedor))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(102, 102, 102)
+                                .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btBuscarProveedor))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,8 +101,8 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -103,10 +111,17 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
         CreacionBD bd = new CreacionBD();
         rs = bd.GetProveedoresPorCod(tfCodigo.getText());
+        cbCodigo.removeAllItems();
         try {
-            while (rs.next()) {
-                cbCodigo.addItem(rs.getString(1));
+            if (rs.next()) {
+                do {
+                    cbCodigo.addItem(rs.getString(1));
+                } while (rs.next());
+
+            } else {
+                System.out.println("No hay nada");
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,12 +131,17 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     private void cbCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCodigoMouseClicked
         String codigo = String.valueOf(cbCodigo.getSelectedItem());
         try {
+            datosText.setText("");
             rs.first();
-            while (rs.next()) {
-                if (codigo.equals(rs.getString(1))) {
-                    tfDatos.setText(rs.getString(1) + "\n" + rs.getString(2) + "\n" + rs.getString(3) + "\n" + rs.getString(4));
-                }
+            if (rs.next()) {
+                rs.first();
+                do {
+                    if (cbCodigo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(1))) {
+                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+                    }
+                } while (rs.next());
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
         }     }//GEN-LAST:event_cbCodigoMouseClicked
@@ -133,8 +153,9 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProveedor;
     private javax.swing.JComboBox<String> cbCodigo;
+    private javax.swing.JTextArea datosText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfDatos;
     // End of variables declaration//GEN-END:variables
 }

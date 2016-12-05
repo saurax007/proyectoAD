@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class GestionDeProveedores extends javax.swing.JFrame {
 
-    ResultSet rs = null;
+    ResultSet rs;
     int pagina;
     int ultimaPagina;
     ArrayList<String> CodigoProveedor = new ArrayList<String>();
@@ -265,6 +265,11 @@ public class GestionDeProveedores extends javax.swing.JFrame {
         });
 
         btListadoBaja.setText("Baja");
+        btListadoBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListadoBajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -428,7 +433,17 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void btListadoEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoEjecutarConsultaActionPerformed
-        ResultSet rs = null;
+        try {
+            //Limpiar el resultset, el null no funciona
+            if (rs.next()) {
+                while (rs.next()) {
+                    rs.deleteRow();
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionDePiezas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         CreacionBD bd = new CreacionBD();
 
         //Se itera y guarda la informacion del resultset
@@ -448,7 +463,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
         ultimaPagina = Nombre.size() - 1;
 
         tfListadoPagina.setText(String.valueOf(pagina + 1));
-        tfListadoPagTotal.setText(String.valueOf(ultimaPagina+1));
+        tfListadoPagTotal.setText(String.valueOf(ultimaPagina + 1));
         tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
         tfListadoNombre.setText(Nombre.get(pagina));
         tfListadoApellidos.setText(Apellidos.get(pagina));
@@ -458,7 +473,6 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     private void btListadoIzquierdaMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoIzquierdaMasActionPerformed
         //Va a la primera pagina
         pagina = 0;
-        tfListadoPagina.setText(String.valueOf(pagina));
         tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
         tfListadoNombre.setText(Nombre.get(pagina));
         tfListadoApellidos.setText(Apellidos.get(pagina));
@@ -497,6 +511,21 @@ public class GestionDeProveedores extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btListadoIzquierdaActionPerformed
+
+    private void btListadoBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoBajaActionPerformed
+        CreacionBD bd = new CreacionBD();
+        if (tfListadoCodProveedor.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "EL CAMPO CODIGO ESTA VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int flag = bd.BajaProveedores(tfListadoCodProveedor.getText());
+            if (flag == 0) {
+                JOptionPane.showMessageDialog(null, "HA HABIDO UN ERROR INTENTADO BORRAR EL PROVEEDOR", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "BORRADO CORRECTAMENTE", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }    }//GEN-LAST:event_btListadoBajaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -50,7 +50,7 @@ public class CreacionBD {
             + "FOREIGN KEY (CODPROYECTO) REFERENCES PROYECTOS(CODIGO))";
     private static final String INSERT_PIEZAS = "INSERT INTO PIEZAS(CODIGO, NOMBRE, PRECIO, DESCRIPCION) VALUES ('10000', 'PROCESADOR', 129.90, 'INTEL I76700'),"
             + "('10001', 'PROCESADOR', 179.00, 'AMD 8800'),"
-            + "('10002', 'TARGETA GRAFICA', 249.90, 'NVIDIA GTX 1060')";
+            + "('10002', 'TARJETA GRAFICA', 249.90, 'NVIDIA GTX 1060')";
     private static final String INSERT_PROVEEDORES = "INSERT INTO PROVEEDORES(CODIGO, NOMBRE, APELLIDOS, DIRECCION) VALUES('20000', 'MARIO', 'GARCIA PEREZ', 'CALLE ARRIAGA 2'),"
             + "('20001','AITOR','FERNANDEZ ETXEBERRIA','CALLE ANDORRA 43'),"
             + "('20002','JORDI','SANCHEZ RECIO','CALLE ROMERO 26')";
@@ -324,7 +324,8 @@ public class CreacionBD {
 
     }
 
-    public void BajaPiezas(String codigo) {
+    public int BajaPiezas(String codigo) {
+        int flag =0;
         try {
             Connection con = null;
             con = Conectar();
@@ -332,16 +333,17 @@ public class CreacionBD {
             st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("DELETE FROM PIEZAS WHERE CODIGO = ?");
             statement.setString(1, codigo);
-            int retorno = statement.executeUpdate();
+           int retorno = statement.executeUpdate();
             if (retorno > 0) {
                 System.out.println("Borrado correctamente");
+                flag = 1;
             }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-
+        return flag;
     }
 
     public void ModPiezas(String codigo, String nombre, float precio, String descripcion) {
@@ -376,13 +378,6 @@ public class CreacionBD {
             st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("SELECT * FROM PIEZAS");
             rs = statement.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
-                System.out.println(rs.getString(3));
-                System.out.println(rs.getString(4));
-            }
-
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

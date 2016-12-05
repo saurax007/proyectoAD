@@ -52,7 +52,7 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="proveedorCodigoButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Por codigo"/>
+                    <Property name="text" type="java.lang.String" value="Por Codigo"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="proveedorCodigoButtonActionPerformed"/>

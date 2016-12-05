@@ -28,7 +28,7 @@ public class GestionProyectos extends javax.swing.JFrame {
      * reerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         gestionProyectoMenu = new javax.swing.JMenuBar();
@@ -97,7 +97,7 @@ public class GestionProyectos extends javax.swing.JFrame {
 
         consultaProveedorButton.setText("Consulta de Proveedores");
 
-        proveedorCodigoButton.setText("Por codigo");
+        proveedorCodigoButton.setText("Por Codigo");
         proveedorCodigoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 proveedorCodigoButtonActionPerformed(evt);

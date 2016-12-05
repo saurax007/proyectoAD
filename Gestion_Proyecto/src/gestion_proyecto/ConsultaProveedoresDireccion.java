@@ -41,7 +41,8 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
         direccionText = new javax.swing.JTextField();
         btBuscarProveedor = new javax.swing.JButton();
         direccionCombo = new javax.swing.JComboBox<>();
-        datosText = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        datosText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,27 +62,34 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
             }
         });
 
+        datosText.setColumns(20);
+        datosText.setRows(5);
+        jScrollPane1.setViewportView(datosText);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(102, 102, 102)
-                            .addComponent(direccionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(46, 46, 46)
-                            .addComponent(datosText, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(direccionText, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btBuscarProveedor)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(102, 102, 102)
+                                .addComponent(direccionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(direccionText, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btBuscarProveedor)))
+                        .addGap(0, 35, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,36 +102,45 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(direccionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(datosText, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-CreacionBD bd = new CreacionBD();
-        rs = bd.GetProveedoresPorCod(direccionText.getText());
+        CreacionBD bd = new CreacionBD();
+        rs = bd.GetProveedoresPorDireccion(direccionText.getText());
+        direccionCombo.removeAllItems();
         try {
-            while (rs.next()) {
-                direccionCombo.addItem(rs.getString(1));
+            if (rs.next()) {
+                do {
+                    direccionCombo.addItem(rs.getString(4));
+                } while (rs.next());
+
+            } else {
+                System.out.println("No hay nada");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
         }    }//GEN-LAST:event_btBuscarProveedorActionPerformed
 
     private void direccionComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_direccionComboMouseClicked
- String direccion = String.valueOf(direccionCombo.getSelectedItem());
+        String direccion = String.valueOf(direccionCombo.getSelectedItem());
         try {
+            datosText.setText("");
             rs.first();
-            while (rs.next()) {
-                if (direccion.equals(rs.getString(1))) {
-                    datosText.setText(rs.getString(1) + "\n" + rs.getString(2) + "\n" + rs.getString(3) + "\n" + rs.getString(4));
-                }
+            if (rs.next()) {
+                do {
+                    if (direccionCombo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(4))) {
+                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+                    }
+                } while (rs.next());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 
     }//GEN-LAST:event_direccionComboMouseClicked
 
@@ -133,9 +150,10 @@ CreacionBD bd = new CreacionBD();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProveedor;
-    private javax.swing.JTextField datosText;
+    private javax.swing.JTextArea datosText;
     private javax.swing.JComboBox<String> direccionCombo;
     private javax.swing.JTextField direccionText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

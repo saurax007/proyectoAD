@@ -433,16 +433,6 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void btListadoEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoEjecutarConsultaActionPerformed
-        try {
-            //Limpiar el resultset, el null no funciona
-            if (rs.next()) {
-                while (rs.next()) {
-                    rs.deleteRow();
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionDePiezas.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         CreacionBD bd = new CreacionBD();
 

@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author 9fad09
  */
-public class CreacionBD {
+public class ControladorBD {
 
     private static final String crearBD = "CREATE DATABASE proyecto";
     private static final String borrarBD = "DROP DATABASE IF EXISTS proyecto";
@@ -88,7 +88,7 @@ public class CreacionBD {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CreacionBD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull",
@@ -325,7 +325,7 @@ public class CreacionBD {
     }
 
     public int BajaPiezas(String codigo) {
-        int flag =0;
+        int flag = 0;
         try {
             Connection con = null;
             con = Conectar();
@@ -333,7 +333,7 @@ public class CreacionBD {
             st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("DELETE FROM PIEZAS WHERE CODIGO = ?");
             statement.setString(1, codigo);
-           int retorno = statement.executeUpdate();
+            int retorno = statement.executeUpdate();
             if (retorno > 0) {
                 System.out.println("Borrado correctamente");
                 flag = 1;
@@ -454,7 +454,9 @@ public class CreacionBD {
 
     }
 
-    public void BajaProyectos(String codigo) {
+    public int BajaProyectos(String codigo) {
+        int flag = 0;
+
         try {
             Connection con = null;
             con = Conectar();
@@ -465,13 +467,14 @@ public class CreacionBD {
             int retorno = statement.executeUpdate();
             if (retorno > 0) {
                 System.out.println("Borrado correctamente");
+                flag = 1;
             }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-
+        return flag;
     }
 
     public void ModProyectos(String codigo, String nombre, String ciudad) {
@@ -504,12 +507,7 @@ public class CreacionBD {
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("SELECT * FROM PROYECTOS");
-            rs = statement.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
-                System.out.println(rs.getString(3));
-            }
+            rs = statement.executeQuery();      
 
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

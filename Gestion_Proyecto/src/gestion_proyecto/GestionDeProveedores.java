@@ -5,7 +5,7 @@
  */
 package gestion_proyecto;
 
-import gestion_proyecto.GestionBD.CreacionBD;
+import gestion_proyecto.GestionBD.ControladorBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,11 +15,12 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Gregorio
+ * @author Ion
  */
 public class GestionDeProveedores extends javax.swing.JFrame {
 
     ResultSet rs;
+    ControladorBD bd = new ControladorBD();
     int pagina;
     int ultimaPagina;
     ArrayList<String> CodigoProveedor = new ArrayList<String>();
@@ -390,7 +391,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
 
     private void btInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertarActionPerformed
         //Insertar Proveedor
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfCodigoProveedor.getText().equals("") || tfNombre.getText().equals("") || tfApellidos.getText().equals("") || tfDireccion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "HAY ALGUN CAMPO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -400,7 +401,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btInsertarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfCodigoProveedor.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "EL CAMPO CODIGO ESTA VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -416,7 +417,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btEliminarActionPerformed
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfCodigoProveedor.getText().equals("") || tfNombre.getText().equals("") || tfApellidos.getText().equals("") || tfDireccion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "HAY ALGUN CAMPO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -433,8 +434,6 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void btListadoEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoEjecutarConsultaActionPerformed
-
-        CreacionBD bd = new CreacionBD();
 
         //Se itera y guarda la informacion del resultset
         try {
@@ -489,7 +488,6 @@ public class GestionDeProveedores extends javax.swing.JFrame {
 
     private void btListadoIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoIzquierdaActionPerformed
         if (pagina == 0) {
-            JOptionPane.showMessageDialog(null, "YA ESTAS EN LA PRIMERA PAGINA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
             pagina--;
             tfListadoCodProveedor.setText(CodigoProveedor.get(pagina));
@@ -503,7 +501,7 @@ public class GestionDeProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btListadoIzquierdaActionPerformed
 
     private void btListadoBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoBajaActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfListadoCodProveedor.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "EL CAMPO CODIGO ESTA VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {

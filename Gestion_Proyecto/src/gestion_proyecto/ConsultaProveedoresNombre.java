@@ -5,7 +5,7 @@
  */
 package gestion_proyecto;
 
-import gestion_proyecto.GestionBD.CreacionBD;
+import gestion_proyecto.GestionBD.ControladorBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -110,7 +110,7 @@ public class ConsultaProveedoresNombre extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         rs = bd.GetProveedoresPorNombre(nombreText.getText());
         proveedorCombo.removeAllItems();
         try {
@@ -127,13 +127,12 @@ public class ConsultaProveedoresNombre extends javax.swing.JFrame {
     }//GEN-LAST:event_btBuscarProveedorActionPerformed
 
     private void proveedorComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_proveedorComboMouseClicked
-        String direccion = String.valueOf(proveedorCombo.getSelectedItem());
         try {
             rs.first();
             datosText.setText("");
             do {
                 if (proveedorCombo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(2))) {
-                    datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+                    datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)+ "\n");
                 }
             } while (rs.next());
 

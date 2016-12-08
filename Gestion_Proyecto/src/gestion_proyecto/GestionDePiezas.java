@@ -5,7 +5,7 @@
  */
 package gestion_proyecto;
 
-import gestion_proyecto.GestionBD.CreacionBD;
+import gestion_proyecto.GestionBD.ControladorBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class GestionDePiezas extends javax.swing.JFrame {
 
     ResultSet rs;
+    ControladorBD bd = new ControladorBD();
     int pagina;
     int ultimaPagina;
     ArrayList<String> CodigoPieza = new ArrayList<String>();
@@ -183,7 +184,7 @@ public class GestionDePiezas extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,7 +359,7 @@ public class GestionDePiezas extends javax.swing.JFrame {
                     .addComponent(btListadoIzquierda)
                     .addComponent(btListadoDerecha)
                     .addComponent(btListadoDerechaMas))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Listado de Piezas", jPanel4);
@@ -371,7 +372,7 @@ public class GestionDePiezas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 382, Short.MAX_VALUE)
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("");
@@ -394,7 +395,7 @@ public class GestionDePiezas extends javax.swing.JFrame {
     }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void btInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertarActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfCodigoPiezas.getText().equals("") || tfPrecio.getText().equals("") || tfPrecio.getText().equals("") || tfDescripcion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "HAY ALGUN CAMPO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -405,7 +406,7 @@ public class GestionDePiezas extends javax.swing.JFrame {
     }//GEN-LAST:event_btInsertarActionPerformed
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfCodigoPiezas.getText().equals("") || tfPrecio.getText().equals("") || tfPrecio.getText().equals("") || tfDescripcion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "HAY ALGUN CAMPO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -415,7 +416,7 @@ public class GestionDePiezas extends javax.swing.JFrame {
         }    }//GEN-LAST:event_btModificarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfCodigoPiezas.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "EL CAMPO CODIGO ESTA VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -430,7 +431,7 @@ public class GestionDePiezas extends javax.swing.JFrame {
     }//GEN-LAST:event_btEliminarActionPerformed
 
     private void btListadoBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoBajaActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         if (tfListadoCodPieza.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "EL CAMPO CODIGO ESTA VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -445,9 +446,6 @@ public class GestionDePiezas extends javax.swing.JFrame {
     }//GEN-LAST:event_btListadoBajaActionPerformed
 
     private void btListadoEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoEjecutarConsultaActionPerformed
-
-        CreacionBD bd = new CreacionBD();
-
         //Se itera y guarda la informacion del resultset
         try {
             rs = bd.GetPiezas();
@@ -487,7 +485,6 @@ public class GestionDePiezas extends javax.swing.JFrame {
 
     private void btListadoIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoIzquierdaActionPerformed
         if (pagina == 0) {
-            JOptionPane.showMessageDialog(null, "YA ESTAS EN LA PRIMERA PAGINA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
             pagina--;
             tfListadoCodPieza.setText(CodigoPieza.get(pagina));

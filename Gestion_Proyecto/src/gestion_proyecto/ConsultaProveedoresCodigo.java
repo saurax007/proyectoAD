@@ -5,7 +5,7 @@
  */
 package gestion_proyecto;
 
-import gestion_proyecto.GestionBD.CreacionBD;
+import gestion_proyecto.GestionBD.ControladorBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -48,7 +48,7 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
 
         jLabel1.setText("Escribe el codigo o parte del codigo");
 
-        btBuscarProveedor.setText("Buscar Proveedor");
+        btBuscarProveedor.setText("Buscar Pieza");
         btBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscarProveedorActionPerformed(evt);
@@ -84,7 +84,7 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(102, 102, 102)
                                 .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 41, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -109,8 +109,8 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-        CreacionBD bd = new CreacionBD();
-        rs = bd.GetProveedoresPorCod(tfCodigo.getText());
+        ControladorBD bd = new ControladorBD();
+        rs = bd.GetPiezasPorCod(tfCodigo.getText());
         cbCodigo.removeAllItems();
         try {
             if (rs.next()) {
@@ -129,7 +129,6 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
     }//GEN-LAST:event_btBuscarProveedorActionPerformed
 
     private void cbCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCodigoMouseClicked
-        String codigo = String.valueOf(cbCodigo.getSelectedItem());
         try {
             datosText.setText("");
             rs.first();
@@ -137,7 +136,7 @@ public class ConsultaProveedoresCodigo extends javax.swing.JFrame {
                 rs.first();
                 do {
                     if (cbCodigo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(1))) {
-                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + String.valueOf(rs.getFloat(3)) + " " + rs.getString(4)+ "\n");
                     }
                 } while (rs.next());
             }

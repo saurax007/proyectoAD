@@ -5,18 +5,24 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.ControladorBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaProyectosCodigo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConsultaProveedoreesCodigo
-     */
+    ResultSet rs = null;
+
     public ConsultaProyectosCodigo() {
         initComponents();
-                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cbCodigo.removeAllItems();
 
     }
 
@@ -30,10 +36,11 @@ public class ConsultaProyectosCodigo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        codigoText = new javax.swing.JTextField();
+        tfCodigo = new javax.swing.JTextField();
         proyectoButton = new javax.swing.JButton();
-        codigosCombo = new javax.swing.JComboBox<>();
-        tfDatos = new javax.swing.JTextField();
+        cbCodigo = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        datosText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,27 +53,36 @@ public class ConsultaProyectosCodigo extends javax.swing.JFrame {
             }
         });
 
-        codigosCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCodigo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCodigoMouseClicked(evt);
+            }
+        });
+
+        datosText.setColumns(20);
+        datosText.setRows(5);
+        jScrollPane1.setViewportView(datosText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(codigoText, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(proyectoButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
-                        .addComponent(codigosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -75,32 +91,68 @@ public class ConsultaProyectosCodigo extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(codigoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(proyectoButton))
                 .addGap(18, 18, 18)
-                .addComponent(codigosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tfDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void proyectoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proyectoButtonActionPerformed
-        // TODO add your handling code here:
+        ControladorBD bd = new ControladorBD();
+        rs = bd.GetProyectosPorCod(tfCodigo.getText());
+        cbCodigo.removeAllItems();
+        try {
+            if (rs.next()) {
+                do {
+                    cbCodigo.addItem(rs.getString(1));
+                } while (rs.next());
+
+            } else {
+                System.out.println("No hay nada");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_proyectoButtonActionPerformed
+
+    private void cbCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCodigoMouseClicked
+try {
+            datosText.setText("");
+            rs.first();
+            if (rs.next()) {
+                rs.first();
+                do {
+                    if (cbCodigo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(1))) {
+                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3)+ "\n");
+                    }
+                } while (rs.next());
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+
+    }//GEN-LAST:event_cbCodigoMouseClicked
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField codigoText;
-    private javax.swing.JComboBox<String> codigosCombo;
+    private javax.swing.JComboBox<String> cbCodigo;
+    private javax.swing.JTextArea datosText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton proyectoButton;
-    private javax.swing.JTextField tfDatos;
+    private javax.swing.JTextField tfCodigo;
     // End of variables declaration//GEN-END:variables
 }

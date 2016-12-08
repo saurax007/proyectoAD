@@ -18,7 +18,7 @@ public class prueba {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         ResultSet rs = null;
         rs = bd.GetProveedoresPorCod("2");
         while (rs.next()) {

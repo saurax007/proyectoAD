@@ -5,18 +5,27 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.ControladorBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class ConsultaProyectosCiudad extends javax.swing.JFrame {
 
+    ResultSet rs = null;
+
     /**
      * Creates new form ConsultaProveedoreesCodigo
      */
     public ConsultaProyectosCiudad() {
         initComponents();
-                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        ciudadesCombo.removeAllItems();
 
     }
 
@@ -34,19 +43,29 @@ public class ConsultaProyectosCiudad extends javax.swing.JFrame {
         btBuscarProyectos = new javax.swing.JButton();
         ciudadesCombo = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        datosText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Escriba laCiudad");
 
         btBuscarProyectos.setText("Buscar Pryectos");
+        btBuscarProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProyectosActionPerformed(evt);
+            }
+        });
 
         ciudadesCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ciudadesCombo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ciudadesComboMouseClicked(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        datosText.setColumns(20);
+        datosText.setRows(5);
+        jScrollPane1.setViewportView(datosText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,17 +110,54 @@ public class ConsultaProyectosCiudad extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btBuscarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProyectosActionPerformed
+        ControladorBD bd = new ControladorBD();
+        rs = bd.GetProyectosPorCiudad(ciudadText.getText());
+        ciudadesCombo.removeAllItems();
+        try {
+            if (rs.next()) {
+                do {
+                    ciudadesCombo.addItem(rs.getString(3));
+                } while (rs.next());
+
+            } else {
+                System.out.println("No hay nada");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }    }//GEN-LAST:event_btBuscarProyectosActionPerformed
+
+    private void ciudadesComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ciudadesComboMouseClicked
+
+        try {
+            datosText.setText("");
+            rs.first();
+            if (rs.next()) {
+                rs.first();
+                do {
+                    if (ciudadesCombo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(3))) {
+                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + " " + rs.getString(3) + "\n");
+                    }
+                } while (rs.next());
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_ciudadesComboMouseClicked
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProyectos;
     private javax.swing.JTextField ciudadText;
     private javax.swing.JComboBox<String> ciudadesCombo;
+    private javax.swing.JTextArea datosText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

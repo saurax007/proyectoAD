@@ -5,7 +5,11 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.ControladorBD;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +22,7 @@ public class ConsultaPiezasCodigo extends javax.swing.JFrame {
     public ConsultaPiezasCodigo() {
         initComponents();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cbCodigo.removeAllItems();
 
     }
 
@@ -35,7 +40,7 @@ public class ConsultaPiezasCodigo extends javax.swing.JFrame {
         btBuscarProveedor = new javax.swing.JButton();
         cbCodigo = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        datosText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,10 +54,15 @@ public class ConsultaPiezasCodigo extends javax.swing.JFrame {
         });
 
         cbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCodigo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cbCodigoMousePressed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        datosText.setColumns(20);
+        datosText.setRows(5);
+        jScrollPane1.setViewportView(datosText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,8 +107,42 @@ public class ConsultaPiezasCodigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-        
+        ControladorBD bd = new ControladorBD();
+        rs = bd.GetPiezasPorCod(tfCodigo.getText());
+        cbCodigo.removeAllItems();
+        try {
+            if (rs.next()) {
+                do {
+                    cbCodigo.addItem(rs.getString(1));
+                } while (rs.next());
+
+            } else {
+                System.out.println("No hay nada");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btBuscarProveedorActionPerformed
+
+    private void cbCodigoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCodigoMousePressed
+        String codigo = String.valueOf(cbCodigo.getSelectedItem());
+        try {
+            datosText.setText("");
+            rs.first();
+            if (rs.next()) {
+                rs.first();
+                do {
+                    if (cbCodigo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(1))) {
+                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)+ "\n");
+                    }
+                } while (rs.next());
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbCodigoMousePressed
 
     /**
      * @param args the command line arguments
@@ -107,9 +151,9 @@ public class ConsultaPiezasCodigo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarProveedor;
     private javax.swing.JComboBox<String> cbCodigo;
+    private javax.swing.JTextArea datosText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField tfCodigo;
     // End of variables declaration//GEN-END:variables
 }

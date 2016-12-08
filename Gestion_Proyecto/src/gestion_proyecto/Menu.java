@@ -5,7 +5,7 @@
  */
 package gestion_proyecto;
 
-import gestion_proyecto.GestionBD.CreacionBD;
+import gestion_proyecto.GestionBD.ControladorBD;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author Gregorio
  */
-public class GestionProyectos extends javax.swing.JFrame {
+public class Menu extends javax.swing.JFrame {
 
     /**
      * Creates new form GestionProyectos
      */
-    public GestionProyectos() {
+    public Menu() {
         initComponents();
     }
 
@@ -253,7 +253,7 @@ public class GestionProyectos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearBDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearBDButtonActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         //comprueba si existe
         Boolean existe = bd.ComprobarBD();
         if (existe) {
@@ -276,7 +276,7 @@ public class GestionProyectos extends javax.swing.JFrame {
     }//GEN-LAST:event_proveedorCodigoButtonActionPerformed
 
     private void borrarBDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBDButtonActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         JFrame parent = new JFrame();
         //comprueba si existe
         Boolean existe = bd.ComprobarBD();
@@ -316,7 +316,8 @@ public class GestionProyectos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-//Falta crear la GestionDeProyectos
+        GestionDeProyectos gdp = new GestionDeProyectos();
+        gdp.show();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -371,20 +372,21 @@ public class GestionProyectos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionProyectos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionProyectos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionProyectos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionProyectos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionProyectos().setVisible(true);
+                new Menu().setVisible(true);
             }
         });
     }

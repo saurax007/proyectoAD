@@ -5,7 +5,7 @@
  */
 package gestion_proyecto;
 
-import gestion_proyecto.GestionBD.CreacionBD;
+import gestion_proyecto.GestionBD.ControladorBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -110,7 +110,7 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProveedorActionPerformed
-        CreacionBD bd = new CreacionBD();
+        ControladorBD bd = new ControladorBD();
         rs = bd.GetProveedoresPorDireccion(direccionText.getText());
         direccionCombo.removeAllItems();
         try {
@@ -134,7 +134,7 @@ public class ConsultaProveedoresDireccion extends javax.swing.JFrame {
             if (rs.next()) {
                 do {
                     if (direccionCombo.getSelectedItem().toString().equalsIgnoreCase(rs.getString(4))) {
-                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+                        datosText.append(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)+ "\n");
                     }
                 } while (rs.next());
             }

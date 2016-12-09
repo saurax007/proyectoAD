@@ -5,18 +5,65 @@
  */
 package gestion_proyecto;
 
+import gestion_proyecto.GestionBD.ControladorBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gregorio
  */
 public class GestionGlobalPPP extends javax.swing.JFrame {
 
+    ResultSet rsProveedor = null;
+    ResultSet rsPieza = null;
+    ResultSet rsProyecto = null;
+
     /**
      * Creates new form GestionGlobalPPP
      */
     public GestionGlobalPPP() {
         initComponents();
-                this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        ControladorBD bd = new ControladorBD();
+        cbProveedor.removeAllItems();
+        cbPieza.removeAllItems();
+        cbProyecto.removeAllItems();
+        rsProveedor = bd.GetProveedores();
+        rsPieza = bd.GetPiezas();
+        rsProyecto = bd.GetProyectos();
+        //Si los resultset no esta vacio rellena los combobox
+        try {
+            if (rsProveedor.next()) {
+                do {
+                    cbProveedor.addItem(rsProveedor.getString(1));
+                } while (rsProveedor.next());
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            if (rsPieza.next()) {
+                do {
+                    cbPieza.addItem(rsPieza.getString(1));
+                } while (rsPieza.next());
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            if (rsProyecto.next()) {
+                do {
+                    cbProyecto.addItem(rsProyecto.getString(1));
+                } while (rsProyecto.next());
+
+            } else {
+                System.out.println("No hay nada");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProveedoresCodigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -49,10 +96,25 @@ public class GestionGlobalPPP extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btInsertar.setText("Insertar");
+        btInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInsertarActionPerformed(evt);
+            }
+        });
 
         btModificar.setText("Modificar");
+        btModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btModificarActionPerformed(evt);
+            }
+        });
 
         btEliminar.setText("Eliminar");
+        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarActionPerformed(evt);
+            }
+        });
 
         btListado.setText("Listado");
 
@@ -85,10 +147,6 @@ public class GestionGlobalPPP extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(27, 27, 27)
-                        .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btInsertar)
@@ -98,6 +156,11 @@ public class GestionGlobalPPP extends javax.swing.JFrame {
                         .addComponent(btEliminar)
                         .addGap(18, 18, 18)
                         .addComponent(btListado))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -146,21 +209,35 @@ public class GestionGlobalPPP extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(cbProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfPRoyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertarActionPerformed
+        ControladorBD bd = new ControladorBD();
+        bd.Relacionar(cbProveedor.getSelectedItem().toString(), cbPieza.getSelectedItem().toString(), cbProyecto.getSelectedItem().toString(), Float.parseFloat(tfCantidad.getText()));
+        
+    }//GEN-LAST:event_btInsertarActionPerformed
+
+    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
+ ControladorBD bd = new ControladorBD();
+        bd.ModificarCantidad(cbProveedor.getSelectedItem().toString(), cbPieza.getSelectedItem().toString(), cbProyecto.getSelectedItem().toString(), Float.parseFloat(tfCantidad.getText()));
+    }//GEN-LAST:event_btModificarActionPerformed
+
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+ControladorBD bd = new ControladorBD();
+        bd.EliminarRelacion(cbProveedor.getSelectedItem().toString(), cbPieza.getSelectedItem().toString(), cbProyecto.getSelectedItem().toString(), Float.parseFloat(tfCantidad.getText()));
+                                      }//GEN-LAST:event_btEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEliminar;

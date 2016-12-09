@@ -26,11 +26,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="tfCantidad" min="-2" pref="74" max="-2" attributes="0"/>
-                  </Group>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="btInsertar" min="-2" max="-2" attributes="0"/>
@@ -40,6 +35,12 @@
                       <Component id="btEliminar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btListado" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="tfCantidad" min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -103,10 +104,10 @@
                   <Component id="cbProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfPRoyecto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="43" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfCantidad" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -118,16 +119,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Insertar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btInsertarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btModificar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btModificarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btEliminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEliminarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btListado">
       <Properties>

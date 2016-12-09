@@ -462,7 +462,7 @@ public class ControladorBD {
             con = Conectar();
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
-            PreparedStatement statement = con.prepareStatement("DELETE FROM PPROYECTOS WHERE CODIGO = '?'");
+            PreparedStatement statement = con.prepareStatement("DELETE FROM PPROYECTOS WHERE CODIGO = ?");
             statement.setString(1, codigo);
             int retorno = statement.executeUpdate();
             if (retorno > 0) {
@@ -507,7 +507,7 @@ public class ControladorBD {
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
             PreparedStatement statement = con.prepareStatement("SELECT * FROM PROYECTOS");
-            rs = statement.executeQuery();      
+            rs = statement.executeQuery();
 
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
@@ -609,6 +609,54 @@ public class ControladorBD {
             System.out.println("VendorError: " + ex.getErrorCode());
         }
 
+    }
+
+    public void ModificarCantidad(String codProveedor, String codPieza, String codProyecto, float cantidad) {
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("UPDATE GESTION SET CANTIDAD = ? WHERE CODPROVEEDOR = ? AND CODPIEZA = ? AND CODPROYECTO = ?");
+            statement.setFloat(1, cantidad);
+            statement.setString(2, codProveedor);
+            statement.setString(3, codPieza);
+            statement.setString(4, codProyecto);
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+    public int EliminarRelacion(String codProveedor, String codPieza, String codProyecto, float cantidad) {
+        int flag = 0;
+
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SET FOREIGN_KEY_CHECKS=0;"
+                    + "DELETE FROM GESTION WHERE CODPROVEEDOR = ? AND CODPIEZA = ? AND CODPROYECTO = ? AND CANTIDAD = ?;"
+                    + "SET FOREIGN_KEY_CHECKS=1;");
+            statement.setString(1, codProveedor);
+            statement.setString(2, codPieza);
+            statement.setString(3, codProyecto);
+            statement.setFloat(4, cantidad);
+
+            int retorno = statement.executeUpdate();
+            if (retorno > 0) {
+                System.out.println("Borrado correctamente");
+                flag = 1;
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return flag;
     }
 
     public ResultSet PiezasProveedor(String codProveedor) {

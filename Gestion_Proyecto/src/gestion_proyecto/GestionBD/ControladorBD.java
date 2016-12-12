@@ -666,7 +666,7 @@ public class ControladorBD {
             con = Conectar();
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
-            PreparedStatement statement = con.prepareStatement("SELECT * FROM GESTION WHERE CODPROVEEDOR = '?'");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM GESTION WHERE CODPROVEEDOR = ?");
             statement.setString(1, codProveedor);
             rs = statement.executeQuery();
         } catch (SQLException ex) {
@@ -684,8 +684,25 @@ public class ControladorBD {
             con = Conectar();
             Statement st = con.createStatement();
             st.executeUpdate(usarBD);
-            PreparedStatement statement = con.prepareStatement("SELECT * FROM GESTION WHERE CODPIEZA = '?'");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM GESTION WHERE CODPIEZA = ?");
             statement.setString(1, codPieza);
+            rs = statement.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return rs;
+    }
+ public ResultSet GetListaGestion() {
+        ResultSet rs = null;
+        try {
+            Connection con = null;
+            con = Conectar();
+            Statement st = con.createStatement();
+            st.executeUpdate(usarBD);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM GESTION");
+            
             rs = statement.executeQuery();
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

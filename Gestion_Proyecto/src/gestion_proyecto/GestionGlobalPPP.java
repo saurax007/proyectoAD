@@ -117,6 +117,11 @@ public class GestionGlobalPPP extends javax.swing.JFrame {
         });
 
         btListado.setText("Listado");
+        btListado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListadoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("RELACIONES PIEZAS - PROVEEDORES -PROYECTOS");
 
@@ -234,6 +239,11 @@ public class GestionGlobalPPP extends javax.swing.JFrame {
 ControladorBD bd = new ControladorBD();
         bd.EliminarRelacion(cbProveedor.getSelectedItem().toString(), cbPieza.getSelectedItem().toString(), cbProyecto.getSelectedItem().toString(), Float.parseFloat(tfCantidad.getText()));
                                       }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void btListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListadoActionPerformed
+    Lista lista = new Lista();
+    lista.show();
+    }//GEN-LAST:event_btListadoActionPerformed
 
     /**
      * @param args the command line arguments
